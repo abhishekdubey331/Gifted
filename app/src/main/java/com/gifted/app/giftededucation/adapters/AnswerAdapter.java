@@ -10,10 +10,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gifted.app.giftededucation.R;
+import com.gifted.app.giftededucation.pojo.UserResponses;
+import com.orm.SugarRecord;
 import com.thefinestartist.Base;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHolder> {
@@ -29,8 +34,10 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
 
     private String right_answer;
 
+    private String question;
 
-    public AnswerAdapter(int length, JSONObject jsonObject, String rightAnswer) {
+
+    public AnswerAdapter(int length, JSONObject jsonObject, String rightAnswer, String question) {
         this.jsonObject = jsonObject;
         this.length_options = length;
         this.right_answer = rightAnswer;
@@ -80,8 +87,22 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
                 Toast.makeText(Base.getContext(), "Right Answer is :" + right_answer, Toast.LENGTH_SHORT).show();
 
                 Log.e("Selected Answer", (selected_position + 1) + "");
+                List<UserResponses> responses = new ArrayList<>();
+                long count = UserResponses.count(UserResponses.class);
+                if (count > 0) {
+                    responses = UserResponses.find(UserResponses.class, "question=?", question);
 
-                // Do your another stuff for your onClick
+                }
+
+                if (responses == null) {
+                    //querying list return empty, there is no record found matching the query.
+                    Log.e(AnswerAdapter.class.getSimpleName(), "No Response");
+                } else {
+                    List<UserResponses> userResponses = UserResponses.findWithQuery(UserResponses.class, "Select * from UserResponses where question = ?", question);
+
+                    SugarRecord.saveInTx(userResponses);
+                }
+                
             }
         });
     }

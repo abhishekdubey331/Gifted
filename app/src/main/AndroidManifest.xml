@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.gifted.app.giftededucation">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -37,7 +38,7 @@
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="com.gifted.app.giftededucation" />
 
-        <activity android:name=".activities.InstructionsActivity"></activity>
+        <activity android:name=".activities.InstructionsActivity" />
     </application>
 
 </manifest>

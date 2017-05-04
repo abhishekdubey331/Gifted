@@ -12,6 +12,7 @@ import com.android.volley.toolbox.Volley;
 import com.gifted.app.giftededucation.activities.RegisterActivity;
 import com.gifted.app.giftededucation.interfaces.VolleyCallback;
 import com.gifted.app.giftededucation.pojo.Question;
+import com.gifted.app.giftededucation.pojo.UserResponses;
 import com.gifted.app.giftededucation.utils.Config;
 import com.orm.SugarRecord;
 import com.thefinestartist.Base;
@@ -123,6 +124,7 @@ public class LoginUserRequest {
                     public void onResponse(String response) {
                         Log.e(TAG, response);
                         List<Question> questionList = new ArrayList<>();
+                        List<UserResponses> userResponses = new ArrayList<>();
 
                         try {
                             JSONObject jsonObject = new JSONObject(response);
@@ -138,9 +140,13 @@ public class LoginUserRequest {
                                         jsonObject1.getString("Image"),
                                         jsonObject1.getJSONObject("Options") + "",
                                         jsonObject1.getString("Answer")));
+                                userResponses.add(new UserResponses(jsonObject1.getString("Que_Code"), jsonObject1.getString("Question"), jsonObject1.getString("Exam_Code"),
+                                        jsonObject1.getString("Max_Marks"), jsonObject1.getString("Answer"), ""));
                             }
                             Question.deleteAll(Question.class);
+                            UserResponses.deleteAll(UserResponses.class);
                             SugarRecord.saveInTx(questionList);
+                            SugarRecord.saveInTx(userResponses);
 
 
                         } catch (JSONException e) {

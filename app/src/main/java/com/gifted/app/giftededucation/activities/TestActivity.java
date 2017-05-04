@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,6 +28,7 @@ public class TestActivity extends AppCompatActivity {
     LinearLayout main_layout;
     private static final String TAG = TestActivity.class.getName();
     private TextView timer;
+
 
 
     @Override

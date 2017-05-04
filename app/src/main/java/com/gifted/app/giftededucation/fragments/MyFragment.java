@@ -41,13 +41,13 @@ public class MyFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static MyFragment newInstance(String json_options, String questions, String image_que, String que, String right_answer) {
+    public static MyFragment newInstance(String json_options, String questions, String image_que, String que_num, String right_answer) {
         MyFragment fragment = new MyFragment();
         Bundle args = new Bundle();
         args.putString(json_of_options, json_options);
         args.putString(question, questions);
         args.putString(que_image, image_que);
-        args.putString(que_number, que);
+        args.putString(que_number, que_num);
         args.putString(right_answer_, right_answer);
         fragment.setArguments(args);
         return fragment;
@@ -96,7 +96,7 @@ public class MyFragment extends Fragment {
         }
 
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.answers_recycler);
-        mAdapter = new AnswerAdapter(jsonObject != null ? jsonObject.length() : 0, jsonObject,getRight_answer);
+        mAdapter = new AnswerAdapter(jsonObject != null ? jsonObject.length() : 0, jsonObject,getRight_answer,question_);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(Base.getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

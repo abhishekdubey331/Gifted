@@ -8,17 +8,17 @@ import com.orm.SugarRecord;
 
 public class UserResponses extends SugarRecord {
 
-    private String q_id, exam_code, max_marks, right_answer, user_response;
+    private String q_id, question, exam_code, max_marks, right_answer, user_response;
 
 
-    public UserResponses(String q_id, String exam_code, String max_marks, String right_answer, String user_response) {
+    public UserResponses(String q_id, String question, String exam_code, String max_marks, String right_answer, String user_response) {
         this.q_id = q_id;
         this.exam_code = exam_code;
         this.max_marks = max_marks;
         this.right_answer = right_answer;
         this.user_response = user_response;
+        this.question = question;
     }
-
 
     public String getQ_id() {
         return q_id;
@@ -26,6 +26,14 @@ public class UserResponses extends SugarRecord {
 
     public void setQ_id(String q_id) {
         this.q_id = q_id;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
     public String getExam_code() {

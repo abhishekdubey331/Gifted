@@ -15,9 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gifted.app.giftededucation.R;
+import com.gifted.app.giftededucation.customviews.CustomSpinnerAdapter;
 import com.gifted.app.giftededucation.interfaces.VolleyCallback;
 import com.gifted.app.giftededucation.requests.LoginUserRequest;
-import com.gifted.app.giftededucation.customviews.CustomSpinnerAdapter;
 import com.gifted.app.giftededucation.utils.EncryptPassword;
 import com.thefinestartist.Base;
 
@@ -110,7 +110,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void setFields() {
 
         LoginUserRequest loginUserRequest = new LoginUserRequest();
-        final AlertDialog spotsDialog = new SpotsDialog(RegisterActivity.this,"Please Wait...", R.style.Custom);
+        final AlertDialog spotsDialog = new SpotsDialog(RegisterActivity.this, "Please Wait...", R.style.Custom);
         spotsDialog.show();
         loginUserRequest.register(input_name.getText().toString(), class_array[student_class], input_school.getText().toString(), input_district.getText().toString(), input_state.getText().toString(), input_email.getText().toString(), input_mobile.getText().toString(), EncryptPassword.md5(input_password.getText().toString()), new VolleyCallback() {
             @Override
@@ -119,7 +119,8 @@ public class RegisterActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(result);
                     if (jsonObject.getBoolean("success")) {
                         spotsDialog.dismiss();
-                        startActivity(new Intent(Base.getContext(), TestActivity.class));
+                        Toast.makeText(RegisterActivity.this, "Please login with email & password.", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(Base.getContext(), LogInActivity.class));
                     }
 
 
