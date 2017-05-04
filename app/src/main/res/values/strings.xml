@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Gifted Education</string>
+
+    <string name="sample_question">What is the name given to the person who is very accurate in thinking?</string>
+
+    <string name="available_levels">Available Levels</string>
+
+    <string-array name="class_array">
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sample_answer">He is called Ugly</string>
+    <string name="instructio_note">Please read the instructions carefully:</string>
+    <string name="instructions">Instructions</string>
+    <string name="instruction_one">This is instruction one for users.</string>
+    <string name="instruction_two">This is instruction two.</string>
+
+
+</resources>

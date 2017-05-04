@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#28b764</color>
+    <color name="colorPrimaryDark">#24a45a</color>
+    <color name="colorAccent">#30B0BB</color>
+    <color name="color_app_back">#ECEFF1</color>
+    <color name="selected_answer">#FFC80D</color>
+</resources>

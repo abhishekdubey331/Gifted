@@ -1,0 +1,61 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEEEEE"
+    android:orientation="vertical"
+    tools:context="com.gifted.app.giftededucation.fragments.MyFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="10dp"
+        android:layout_marginTop="@dimen/viewpager_padding"
+        android:background="#FFF">
+
+        <com.gifted.app.giftededucation.customviews.FontTextView
+            android:id="@+id/question_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="@drawable/state_list_drawable"
+            android:padding="10dp"
+            android:text="a.)"
+            android:textColor="#404040"
+            android:textSize="18sp" />
+
+        <com.gifted.app.giftededucation.customviews.FontTextView
+            android:id="@+id/question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="@string/sample_question"
+            android:textColor="#404040"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="15dp"
+        android:visibility="gone"
+        tools:ignore="ContentDescription" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/answers_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" />
+
+</LinearLayout>
