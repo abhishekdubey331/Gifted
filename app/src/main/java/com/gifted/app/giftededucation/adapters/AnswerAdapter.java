@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.gifted.app.giftededucation.R;
 import com.gifted.app.giftededucation.pojo.UserResponses;
-import com.orm.SugarRecord;
 import com.thefinestartist.Base;
 
 import org.json.JSONException;
@@ -86,23 +85,25 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
                 notifyItemChanged(selected_position);
                 Toast.makeText(Base.getContext(), "Right Answer is :" + right_answer, Toast.LENGTH_SHORT).show();
 
-                Log.e("Selected Answer", (selected_position + 1) + "");
                 List<UserResponses> responses = new ArrayList<>();
                 long count = UserResponses.count(UserResponses.class);
-                if (count > 0) {
-                    responses = UserResponses.find(UserResponses.class, "question=?", question);
+                Log.e("Selected Answer", count + "");
 
+                if (count > 0) {
+                    responses = UserResponses.listAll(UserResponses.class);
+                    Log.e("Answer", responses.toString());
                 }
 
-                if (responses == null) {
+               /* if (responses == null) {
                     //querying list return empty, there is no record found matching the query.
                     Log.e(AnswerAdapter.class.getSimpleName(), "No Response");
                 } else {
                     List<UserResponses> userResponses = UserResponses.findWithQuery(UserResponses.class, "Select * from UserResponses where question = ?", question);
+                    Log.e("Selected Answer", (selected_position + 1) + "" + userResponses.get(0).getId());
 
-                    SugarRecord.saveInTx(userResponses);
-                }
-                
+                    SugarRecord.saveInTx(userResponses.get(0).getId());
+                }*/
+
             }
         });
     }
