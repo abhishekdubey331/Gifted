@@ -48,5 +48,7 @@ public class Config {
 
     public static String IMAGE_TYPE=".png";
 
+    public static String DB_NAME="giftedapp.db";
+
 
 }

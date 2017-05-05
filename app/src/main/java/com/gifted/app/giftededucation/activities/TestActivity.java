@@ -13,11 +13,14 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.gifted.app.giftededucation.Global;
 import com.gifted.app.giftededucation.R;
 import com.gifted.app.giftededucation.adapters.MyPageAdapter;
 import com.gifted.app.giftededucation.fragments.MyFragment;
 import com.gifted.app.giftededucation.fragments.ReviewFragment;
-import com.gifted.app.giftededucation.pojo.Question;
+import com.greendao.db.DaoSession;
+import com.greendao.db.Question;
+import com.thefinestartist.Base;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +31,6 @@ public class TestActivity extends AppCompatActivity {
     LinearLayout main_layout;
     private static final String TAG = TestActivity.class.getName();
     private TextView timer;
-
 
 
     @Override
@@ -78,13 +80,10 @@ public class TestActivity extends AppCompatActivity {
 
     private List<Fragment> getFragments() {
         List<Fragment> fList = new ArrayList<Fragment>();
-        List<Question> user_list;
-        long count = Question.count(Question.class);
-        if (count > 0) {
-            user_list = Question.listAll(Question.class);
-            for (int i = 0; i < count; i++) {
-                fList.add(MyFragment.newInstance(user_list.get(i).getOption_json(), user_list.get(i).getQuestion(), user_list.get(i).getImage(), (i + 1) + "",user_list.get(i).getAnswer()));
-            }
+        List<Question> questionList = getAppDaoSession().getQuestionDao().loadAll();
+        for (Question question : questionList) {
+            System.out.println(question);
+            fList.add(MyFragment.newInstance(question.getOption_json(), question.getQuestion(), question.getImage(), question.getQ_no() + "", question.getAnswer()));
 
         }
         return fList;
@@ -128,7 +127,10 @@ public class TestActivity extends AppCompatActivity {
     public void onBackPressed() {
 
 
+    }
 
+    private DaoSession getAppDaoSession() {
+        return ((Global) Base.getContext()).getSession();
     }
 
 

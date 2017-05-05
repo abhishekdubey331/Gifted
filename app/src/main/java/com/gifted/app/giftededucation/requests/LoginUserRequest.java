@@ -9,12 +9,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.gifted.app.giftededucation.Global;
 import com.gifted.app.giftededucation.activities.RegisterActivity;
 import com.gifted.app.giftededucation.interfaces.VolleyCallback;
-import com.gifted.app.giftededucation.pojo.Question;
-import com.gifted.app.giftededucation.pojo.UserResponses;
 import com.gifted.app.giftededucation.utils.Config;
-import com.orm.SugarRecord;
+import com.greendao.db.DaoSession;
+import com.greendao.db.Question;
+import com.greendao.db.UserResponses;
 import com.thefinestartist.Base;
 
 import org.json.JSONArray;
@@ -123,8 +124,8 @@ public class LoginUserRequest {
                     @Override
                     public void onResponse(String response) {
                         Log.e(TAG, response);
-                        List<Question> questionList = new ArrayList<>();
-                        List<UserResponses> userResponses = new ArrayList<>();
+                        List<com.greendao.db.Question> questionList = new ArrayList<>();
+                        List<com.greendao.db.UserResponses> userResponses = new ArrayList<>();
 
                         try {
                             JSONObject jsonObject = new JSONObject(response);
@@ -132,7 +133,7 @@ public class LoginUserRequest {
                             Log.e("Values", "Hello");
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                                questionList.add(new Question("Q." + i,
+                                questionList.add(new com.greendao.db.Question((long) i, Integer.parseInt(i + ""),
                                         jsonObject1.getString("Que_Code"),
                                         jsonObject1.getString("Exam_Code"),
                                         jsonObject1.getString("Max_Marks"),
@@ -140,13 +141,15 @@ public class LoginUserRequest {
                                         jsonObject1.getString("Image"),
                                         jsonObject1.getJSONObject("Options") + "",
                                         jsonObject1.getString("Answer")));
-                                userResponses.add(new UserResponses(jsonObject1.getString("Que_Code"), jsonObject1.getString("Question"), jsonObject1.getString("Exam_Code"),
-                                        jsonObject1.getString("Max_Marks"), jsonObject1.getString("Answer"), ""));
+                                userResponses.add(new com.greendao.db.UserResponses((long) i, Integer.parseInt(i + ""), jsonObject1.getString("Que_Code"), jsonObject1.getString("Question"), jsonObject1.getString("Exam_Code"),
+                                        jsonObject1.getString("Max_Marks"), jsonObject1.getString("Answer"), "", (long) i));
                             }
-                            Question.deleteAll(Question.class);
-                            UserResponses.deleteAll(UserResponses.class);
-                            SugarRecord.saveInTx(questionList);
-                            SugarRecord.saveInTx(userResponses);
+                            getAppDaoSession().deleteAll(Question.class);
+                            getAppDaoSession().deleteAll(UserResponses.class);
+
+
+                            getAppDaoSession().getQuestionDao().insertInTx(questionList);
+                            getAppDaoSession().getUserResponsesDao().insertInTx(userResponses);
 
 
                         } catch (JSONException e) {
@@ -177,6 +180,10 @@ public class LoginUserRequest {
         //Adding the string request to the queue
         RequestQueue requestQueue = Volley.newRequestQueue(Base.getContext());
         requestQueue.add(stringRequest);
+    }
+
+    private DaoSession getAppDaoSession() {
+        return ((Global) Base.getContext()).getSession();
     }
 
 
