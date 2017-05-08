@@ -9,7 +9,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gifted.app.giftededucation.Global;
 import com.gifted.app.giftededucation.R;
+import com.greendao.db.DaoSession;
+import com.greendao.db.UserResponses;
+import com.greendao.db.UserResponsesDao;
 import com.thefinestartist.Base;
 
 import org.json.JSONException;
@@ -29,13 +33,14 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
 
     private String right_answer;
 
-    private String question;
+    private int question_number;
 
 
-    public AnswerAdapter(int length, JSONObject jsonObject, String rightAnswer, String question) {
+    public AnswerAdapter(int length, JSONObject jsonObject, String rightAnswer, int question) {
         this.jsonObject = jsonObject;
         this.length_options = length;
         this.right_answer = rightAnswer;
+        question_number = question;
     }
 
     @Override
@@ -81,6 +86,12 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
                 notifyItemChanged(selected_position);
                 Toast.makeText(Base.getContext(), "Right Answer is :" + right_answer, Toast.LENGTH_SHORT).show();
 
+                UserResponses userResponses = getAppDaoSession().getUserResponsesDao()
+                        .queryBuilder().where(UserResponsesDao.Properties.Q_no.eq(question_number)).unique();
+
+                userResponses.setUser_response(options_values[selected_position]);
+                getAppDaoSession().getUserResponsesDao().update(userResponses);
+
 
             }
         });
@@ -107,5 +118,10 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
         public void onClick(View v) {
         }
     }
+
+    private DaoSession getAppDaoSession() {
+        return ((Global) Base.getContext()).getSession();
+    }
+
 
 }

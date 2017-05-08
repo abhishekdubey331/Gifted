@@ -21,6 +21,8 @@
     <string name="instructions">Instructions</string>
     <string name="instruction_one">This is instruction one for users.</string>
     <string name="instruction_two">This is instruction two.</string>
+    <string name="your_details">Your Details</string>
+    <string name="submit">Submit</string>
 
 
 </resources>

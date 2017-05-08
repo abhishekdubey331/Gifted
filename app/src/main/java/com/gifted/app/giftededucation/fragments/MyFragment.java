@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,7 +84,7 @@ public class MyFragment extends Fragment {
 
         question.setText(question_);
 
-        question_number.setText("Q." + que_number_);
+        question_number.setText("Q." + (Integer.parseInt(que_number_) + 1));
 
         JSONObject jsonObject = null;
 
@@ -96,7 +97,7 @@ public class MyFragment extends Fragment {
         }
 
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.answers_recycler);
-        mAdapter = new AnswerAdapter(jsonObject != null ? jsonObject.length() : 0, jsonObject,getRight_answer,question_);
+        mAdapter = new AnswerAdapter(jsonObject != null ? jsonObject.length() : 0, jsonObject, getRight_answer, Integer.parseInt(que_number_));
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(Base.getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

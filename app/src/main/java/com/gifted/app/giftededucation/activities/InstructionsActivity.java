@@ -17,6 +17,7 @@ import com.thefinestartist.Base;
 public class InstructionsActivity extends AppCompatActivity {
 
     private static final String TAG = Splash.class.getName();
+    private TextView instructions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,8 @@ public class InstructionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_instructions);
         Toolbar toolbarTop = (Toolbar) findViewById(R.id.toolbar_top);
         TextView mTitle = (TextView) toolbarTop.findViewById(R.id.toolbar_title);
+        instructions = (TextView) findViewById(R.id.fontTextView);
+
         Prefs.clear();
 
         Button start_test = (Button) findViewById(R.id.start_test);
@@ -39,6 +42,13 @@ public class InstructionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Base.getContext(), TestActivity.class));
+            }
+        });
+        instructions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Base.getContext(), TestActivity.class));
+
             }
         });
 
