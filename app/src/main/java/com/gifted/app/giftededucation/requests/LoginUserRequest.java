@@ -135,7 +135,7 @@ public class LoginUserRequest {
                             Pref.put("last", jsonArray.length());
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                                questionList.add(new com.greendao.db.Question((long) i, Integer.parseInt(i + ""),
+                                questionList.add(new com.greendao.db.Question((long) i, Integer.parseInt(jsonObject1.getString("Q_ID")),
                                         jsonObject1.getString("Que_Code"),
                                         jsonObject1.getString("Exam_Code"),
                                         jsonObject1.getString("Max_Marks"),
@@ -143,8 +143,12 @@ public class LoginUserRequest {
                                         jsonObject1.getString("Image"),
                                         jsonObject1.getJSONObject("Options") + "",
                                         jsonObject1.getString("Answer")));
-                                userResponses.add(new com.greendao.db.UserResponses((long) i, Integer.parseInt(i + ""), jsonObject1.getString("Que_Code"), jsonObject1.getString("Question"), jsonObject1.getString("Exam_Code"),
-                                        jsonObject1.getString("Max_Marks"), jsonObject1.getString("Answer"), "", (long) i));
+                                userResponses.add(new com.greendao.db.UserResponses((long) i, Integer.parseInt(jsonObject1.getString("Q_ID")),
+                                        jsonObject1.getString("Que_Code"),
+                                        jsonObject1.getString("Exam_Code"),
+                                        jsonObject1.getString("Max_Marks"),
+                                        jsonObject1.getString("Question"),
+                                        jsonObject1.getString("Answer"), "", (long) i));
                             }
                             getAppDaoSession().deleteAll(Question.class);
                             getAppDaoSession().deleteAll(UserResponses.class);

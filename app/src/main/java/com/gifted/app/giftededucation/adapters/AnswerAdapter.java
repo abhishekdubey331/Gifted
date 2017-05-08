@@ -15,7 +15,9 @@ import com.greendao.db.DaoSession;
 import com.greendao.db.UserResponses;
 import com.greendao.db.UserResponsesDao;
 import com.thefinestartist.Base;
+import com.thefinestartist.utils.preferences.Pref;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,7 +36,9 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
     private String right_answer;
 
     private int question_number;
-    JSONObject responses_obj;
+    private JSONObject responses_obj;
+    private JSONObject other_details;
+    private JSONArray jsonarray;
 
 
     public AnswerAdapter(int length, JSONObject jsonObject, String rightAnswer, int question) {
@@ -43,6 +47,8 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
         this.right_answer = rightAnswer;
         question_number = question;
         responses_obj = new JSONObject();
+        other_details = new JSONObject();
+        jsonarray = new JSONArray();
     }
 
     @Override
@@ -64,7 +70,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
         holder.options.setText(options_array[position]);
 
         final UserResponses userResponses = getAppDaoSession().getUserResponsesDao()
-                .queryBuilder().where(UserResponsesDao.Properties.Q_no.eq(question_number)).unique();
+                .queryBuilder().where(UserResponsesDao.Properties.Id.eq(question_number)).unique();
 
 
         if (!userResponses.getUser_response().contentEquals("")) {
@@ -104,12 +110,19 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
                 Toast.makeText(Base.getContext(), "Right Answer is :" + right_answer, Toast.LENGTH_SHORT).show();
 
                 UserResponses userResponses = getAppDaoSession().getUserResponsesDao()
-                        .queryBuilder().where(UserResponsesDao.Properties.Q_no.eq(question_number)).unique();
+                        .queryBuilder().where(UserResponsesDao.Properties.Id.eq(question_number)).unique();
 
                 userResponses.setUser_response(options_values[selected_position]);
                 getAppDaoSession().getUserResponsesDao().update(userResponses);
                 try {
-                    responses_obj.put(userResponses.getQ_code(),userResponses.getUser_response());
+                    other_details.put("Q_ID", userResponses.getQ_no());
+                    other_details.put("right_answer", right_answer);
+                    other_details.put("user_response", options_values[selected_position]);
+                    other_details.put("max_marks", 4);
+                    other_details.put("marks_secured", 40);
+                    jsonarray.put(other_details);
+                    Pref.put("Response", Pref.get("Response","")+","+jsonarray.toString().replace("[", "").replace("]", ""));
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

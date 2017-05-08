@@ -83,7 +83,7 @@ public class TestActivity extends AppCompatActivity {
         List<Question> questionList = getAppDaoSession().getQuestionDao().loadAll();
         for (Question question : questionList) {
             System.out.println(question);
-            fList.add(MyFragment.newInstance(question.getOption_json(), question.getQuestion(), question.getImage(), question.getQ_no() + "", question.getAnswer()));
+            fList.add(MyFragment.newInstance(question.getOption_json(), question.getQuestion(), question.getImage(), question.getId() + "", question.getAnswer()));
 
         }
         return fList;

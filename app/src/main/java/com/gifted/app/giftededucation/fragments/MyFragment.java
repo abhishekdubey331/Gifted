@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.gifted.app.giftededucation.R;
 import com.gifted.app.giftededucation.activities.SubmissionActivity;
 import com.gifted.app.giftededucation.adapters.AnswerAdapter;
+import com.gifted.app.giftededucation.utils.MakingJsonResponse;
 import com.thefinestartist.Base;
 import com.thefinestartist.utils.preferences.Pref;
 
@@ -94,6 +95,9 @@ public class MyFragment extends Fragment {
             proceed.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    MakingJsonResponse makingJsonResponse = new MakingJsonResponse();
+                    String respo = Pref.get("Response", "").replace("\\", "").substring(1);
+                    makingJsonResponse.makingJson("[" + respo + "]");
                     new AlertDialog.Builder(getContext())
                             .setTitle("Submit Test")
                             .setMessage("Are you sure you have completed your test?")

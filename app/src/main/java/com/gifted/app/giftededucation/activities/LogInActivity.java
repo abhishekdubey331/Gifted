@@ -66,12 +66,12 @@ public class LogInActivity extends AppCompatActivity {
                                 String user_id = jsonObject.getJSONArray("userDetails").getJSONObject(0).getString("user_id");
                                 Pref.put(Config.KEY__USER_TOKEN, jsonObject.getString("token"));
                                 Pref.put(Config.KEY_USER_ID, user_id);
+                                Pref.put("user_id", user_id);
                                 Gson gson = new Gson();
                                 String save = gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0).getJSONArray("levels_allowed"));
                                 Pref.put(Config.KEY_EXAMS_ALLOWED, save);
                                 Pref.put(Config.USER_OBJECT, gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0)));
                                 Pref.put(Config.USER_OBJECT, gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0)));
-                                Log.e("UserObj", Pref.get(Config.USER_OBJECT, ""));
                                 startActivity(new Intent(Base.getContext(), LevelsActivity.class));
 
                             } catch (JSONException e) {

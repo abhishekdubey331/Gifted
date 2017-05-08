@@ -12,7 +12,9 @@ import android.widget.TextView;
 
 import com.gifted.app.giftededucation.R;
 import com.gifted.app.giftededucation.adapters.LevelsAdapter;
+import com.gifted.app.giftededucation.utils.Config;
 import com.thefinestartist.Base;
+import com.thefinestartist.utils.preferences.Pref;
 
 public class LevelsActivity extends AppCompatActivity {
 
@@ -36,10 +38,11 @@ public class LevelsActivity extends AppCompatActivity {
         levels_recdycler.setAdapter(adapter);
 
 
-
         adapter.setOnItemClickListener(new LevelsAdapter.MyClickListener() {
             @Override
             public void onItemClick(int position, View v) {
+
+                Pref.put(Config.LEVEL, "SJI");
                 startActivity(new Intent(Base.getContext(), InstructionsActivity.class));
             }
         });

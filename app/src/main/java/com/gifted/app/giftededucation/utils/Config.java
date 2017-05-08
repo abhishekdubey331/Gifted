@@ -35,20 +35,20 @@ public class Config {
 
     public static String KEY__USER_TOKEN;
 
-    public static String KEY_USER_ID;
+    public static String KEY_USER_ID = "USER_ID";
 
     public static String KEY_EXAMS_ALLOWED;
 
-    public static String USER_OBJECT="user_obj";
+    public static String USER_OBJECT = "user_obj";
 
     public static String ALL_QUESTIONS;
 
 
     public static String QUE_LENGTH;
 
-    public static String IMAGE_TYPE=".png";
+    public static String IMAGE_TYPE = ".png";
 
-    public static String DB_NAME="giftedapp.db";
-
+    public static String DB_NAME = "giftedapp.db";
+    public static String LEVEL = "level";
 
 }
