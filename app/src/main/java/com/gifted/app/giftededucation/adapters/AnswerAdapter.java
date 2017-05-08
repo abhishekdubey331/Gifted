@@ -107,7 +107,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
                 selected_position = holder.getAdapterPosition();
                 notifyItemChanged(selected_position);
                 notifyItemChanged(get_position(userResponses.getUser_response()));
-                Toast.makeText(Base.getContext(), "Right Answer is :" + right_answer, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(Base.getContext(), "Right Answer is :" + right_answer, Toast.LENGTH_SHORT).show();
 
                 UserResponses userResponses = getAppDaoSession().getUserResponsesDao()
                         .queryBuilder().where(UserResponsesDao.Properties.Id.eq(question_number)).unique();
