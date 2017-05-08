@@ -22,10 +22,11 @@
         </activity>
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.LogInActivity" />
-        <activity android:name=".activities.TestActivity" />
+        <activity
+            android:name=".activities.TestActivity" />
         <activity android:name=".activities.LevelsActivity" />
         <activity android:name=".activities.InstructionsActivity" />
-        <activity android:name=".activities.SubmissionActivity"></activity>
+        <activity android:name=".activities.SubmissionActivity" />
     </application>
 
 </manifest>

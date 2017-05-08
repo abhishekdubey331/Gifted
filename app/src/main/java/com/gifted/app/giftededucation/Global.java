@@ -1,13 +1,11 @@
 package com.gifted.app.giftededucation;
 
 import android.app.Application;
-import android.content.ContextWrapper;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.gifted.app.giftededucation.utils.Config;
 import com.greendao.db.DaoMaster;
 import com.greendao.db.DaoSession;
-import com.pixplicity.easyprefs.library.Prefs;
 import com.thefinestartist.Base;
 
 /**
@@ -25,12 +23,6 @@ public class Global extends Application {
         super.onCreate();
         Base.initialize(this);
 
-        new Prefs.Builder()
-                .setContext(this)
-                .setMode(ContextWrapper.MODE_PRIVATE)
-                .setPrefsName(getPackageName())
-                .setUseDefaultSharedPreference(true)
-                .build();
     }
 
 

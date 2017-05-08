@@ -34,6 +34,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
     private String right_answer;
 
     private int question_number;
+    JSONObject responses_obj;
 
 
     public AnswerAdapter(int length, JSONObject jsonObject, String rightAnswer, int question) {
@@ -41,6 +42,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
         this.length_options = length;
         this.right_answer = rightAnswer;
         question_number = question;
+        responses_obj = new JSONObject();
     }
 
     @Override
@@ -61,6 +63,22 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
         }
         holder.options.setText(options_array[position]);
 
+        final UserResponses userResponses = getAppDaoSession().getUserResponsesDao()
+                .queryBuilder().where(UserResponsesDao.Properties.Q_no.eq(question_number)).unique();
+
+
+        if (!userResponses.getUser_response().contentEquals("")) {
+            int pos = get_position(userResponses.getUser_response());
+            if (pos == position) {
+                holder.answers.setSelected(true);
+                holder.options.setSelected(true);
+                holder.answers.setBackgroundColor(Color.parseColor("#FFC80D"));
+                holder.options.setBackgroundColor(Color.parseColor("#FFC80D"));
+                holder.answers.setTextColor(Color.parseColor("#FFFFFF"));
+                holder.options.setTextColor(Color.parseColor("#FFFFFF"));
+            }
+        }
+
 
         if (selected_position == position) {
             // Here I am just highlighting the background
@@ -80,10 +98,9 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
             @Override
             public void onClick(View v) {
 
-                // Updating old as well as new positions
-                notifyItemChanged(selected_position);
                 selected_position = holder.getAdapterPosition();
                 notifyItemChanged(selected_position);
+                notifyItemChanged(get_position(userResponses.getUser_response()));
                 Toast.makeText(Base.getContext(), "Right Answer is :" + right_answer, Toast.LENGTH_SHORT).show();
 
                 UserResponses userResponses = getAppDaoSession().getUserResponsesDao()
@@ -91,6 +108,11 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
 
                 userResponses.setUser_response(options_values[selected_position]);
                 getAppDaoSession().getUserResponsesDao().update(userResponses);
+                try {
+                    responses_obj.put(userResponses.getQ_code(),userResponses.getUser_response());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
 
             }
@@ -121,6 +143,42 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
 
     private DaoSession getAppDaoSession() {
         return ((Global) Base.getContext()).getSession();
+    }
+
+
+    private int get_position(String chara) {
+        int b = 0;
+        switch (chara) {
+
+            case "a":
+                b = 1;
+                break;
+
+            case "b":
+                b = 2;
+                break;
+
+            case "c":
+                b = 3;
+                break;
+
+            case "d":
+                b = 4;
+                break;
+
+            case "e":
+                b = 5;
+                break;
+
+            case "f":
+                b = 6;
+                break;
+
+
+        }
+
+
+        return b - 1;
     }
 
 

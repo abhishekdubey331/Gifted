@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.gifted.app.giftededucation.R;
-import com.pixplicity.easyprefs.library.Prefs;
+import com.thefinestartist.utils.preferences.Pref;
 
 public class Splash extends AppCompatActivity {
     private static final String TAG = Splash.class.getName();
@@ -19,7 +19,7 @@ public class Splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         Toolbar toolbarTop = (Toolbar) findViewById(R.id.toolbar_top);
         TextView mTitle = (TextView) toolbarTop.findViewById(R.id.toolbar_title);
-        Prefs.clear();
+        Pref.clear();
 
 
 

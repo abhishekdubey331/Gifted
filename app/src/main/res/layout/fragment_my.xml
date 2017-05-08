@@ -58,4 +58,17 @@
         android:layout_height="wrap_content"
         android:scrollbars="none" />
 
+
+    <Button
+        android:id="@+id/proceed_submission"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/top_margin"
+        android:background="@drawable/button_round"
+        android:padding="@dimen/fab_margin"
+        android:text="@string/proceed_submit"
+        android:textColor="#FFF"
+        android:visibility="gone" />
+
 </LinearLayout>

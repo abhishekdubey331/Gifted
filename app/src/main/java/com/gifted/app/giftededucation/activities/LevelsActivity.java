@@ -36,6 +36,7 @@ public class LevelsActivity extends AppCompatActivity {
         levels_recdycler.setAdapter(adapter);
 
 
+
         adapter.setOnItemClickListener(new LevelsAdapter.MyClickListener() {
             @Override
             public void onItemClick(int position, View v) {

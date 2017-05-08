@@ -39,7 +39,7 @@ public class Config {
 
     public static String KEY_EXAMS_ALLOWED;
 
-    public static String USER_OBJECT;
+    public static String USER_OBJECT="user_obj";
 
     public static String ALL_QUESTIONS;
 

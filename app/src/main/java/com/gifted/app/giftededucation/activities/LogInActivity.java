@@ -13,15 +13,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gifted.app.giftededucation.R;
+import com.gifted.app.giftededucation.customviews.CustomEditText;
+import com.gifted.app.giftededucation.customviews.FontTextView;
 import com.gifted.app.giftededucation.interfaces.VolleyCallback;
 import com.gifted.app.giftededucation.requests.LoginUserRequest;
-import com.gifted.app.giftededucation.customviews.CustomEditText;
 import com.gifted.app.giftededucation.utils.Config;
 import com.gifted.app.giftededucation.utils.EncryptPassword;
-import com.gifted.app.giftededucation.customviews.FontTextView;
 import com.google.gson.Gson;
-import com.pixplicity.easyprefs.library.Prefs;
 import com.thefinestartist.Base;
+import com.thefinestartist.utils.preferences.Pref;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,13 +64,14 @@ public class LogInActivity extends AppCompatActivity {
                             try {
                                 JSONObject jsonObject = new JSONObject(result);
                                 String user_id = jsonObject.getJSONArray("userDetails").getJSONObject(0).getString("user_id");
-                                Prefs.putString(Config.KEY__USER_TOKEN, jsonObject.getString("token"));
-                                Prefs.putString(Config.KEY_USER_ID, user_id);
+                                Pref.put(Config.KEY__USER_TOKEN, jsonObject.getString("token"));
+                                Pref.put(Config.KEY_USER_ID, user_id);
                                 Gson gson = new Gson();
                                 String save = gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0).getJSONArray("levels_allowed"));
-                                Prefs.putString(Config.KEY_EXAMS_ALLOWED, save);
-                                Prefs.putString(Config.USER_OBJECT, gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0)));
-                                Log.e(TAG, Prefs.getString(Config.USER_OBJECT, ""));
+                                Pref.put(Config.KEY_EXAMS_ALLOWED, save);
+                                Pref.put(Config.USER_OBJECT, gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0)));
+                                Pref.put(Config.USER_OBJECT, gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0)));
+                                Log.e("UserObj", Pref.get(Config.USER_OBJECT, ""));
                                 startActivity(new Intent(Base.getContext(), LevelsActivity.class));
 
                             } catch (JSONException e) {

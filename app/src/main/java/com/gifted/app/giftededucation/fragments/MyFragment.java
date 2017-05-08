@@ -1,20 +1,26 @@
 package com.gifted.app.giftededucation.fragments;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gifted.app.giftededucation.R;
+import com.gifted.app.giftededucation.activities.SubmissionActivity;
 import com.gifted.app.giftededucation.adapters.AnswerAdapter;
 import com.thefinestartist.Base;
+import com.thefinestartist.utils.preferences.Pref;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -72,13 +78,43 @@ public class MyFragment extends Fragment {
                              Bundle savedInstanceState) {
         AnswerAdapter mAdapter;
         TextView question, question_number;
+        Button proceed;
+        Typeface typeface;
         ImageView image_for_que;
-
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_my, container, false);
         question = (TextView) rootView.findViewById(R.id.question);
         image_for_que = (ImageView) rootView.findViewById(R.id.image_view);
         question_number = (TextView) rootView.findViewById(R.id.question_number);
+        proceed = (Button) rootView.findViewById(R.id.proceed_submission);
+        typeface = Typeface.createFromAsset(Base.getAssets(), "fonts/MuseoSans_500.otf");
+        if ((Integer.parseInt(que_number_) + 1) == Pref.get("last", 30)) {
+            proceed.setVisibility(View.VISIBLE);
+            proceed.setTypeface(typeface);
+            proceed.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new AlertDialog.Builder(getContext())
+                            .setTitle("Submit Test")
+                            .setMessage("Are you sure you have completed your test?")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // continue with delete
+                                    startActivity(new Intent(Base.getContext(), SubmissionActivity.class));
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // do nothing
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                }
+            });
+
+        }
+
 
         // Picasso.with(Base.getContext()).load(Config.S3_BASE_URL).into(image_for_que);
 

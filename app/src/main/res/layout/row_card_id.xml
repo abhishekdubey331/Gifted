@@ -1,13 +1,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingEnd="10dp"
+    android:paddingLeft="70dp"
+    android:paddingRight="10dp"
+    android:paddingStart="70dp">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
 
         <com.gifted.app.giftededucation.customviews.FontTextView
@@ -15,7 +17,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/spot_size"
-            android:text="@string/app_name" />
+            android:text="@string/name"
+            android:textSize="18sp" />
 
         <View
             android:layout_width="10dp"
@@ -26,7 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/spot_size"
-            android:text="@string/app_name" />
+            android:text="Anurag Kumar"
+            android:textSize="18sp" />
 
 
     </LinearLayout>
@@ -34,7 +38,6 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
 
         <com.gifted.app.giftededucation.customviews.FontTextView
@@ -42,7 +45,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/spot_size"
-            android:text="@string/app_name" />
+            android:text="@string/classs"
+            android:textSize="18sp" />
 
         <View
             android:layout_width="10dp"
@@ -52,8 +56,10 @@
             android:id="@+id/classs_"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/spot_size"
-            android:text="@string/app_name" />
+            android:paddingLeft="@dimen/fab_margin"
+            android:paddingStart="@dimen/fab_margin"
+            android:text="8"
+            android:textSize="18sp" />
 
 
     </LinearLayout>
@@ -61,7 +67,6 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
 
         <com.gifted.app.giftededucation.customviews.FontTextView
@@ -69,7 +74,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/spot_size"
-            android:text="@string/app_name" />
+            android:text="@string/school"
+
+            android:textSize="18sp" />
 
         <View
             android:layout_width="10dp"
@@ -79,8 +86,9 @@
             android:id="@+id/school_"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/spot_size"
-            android:text="@string/app_name" />
+            android:padding="0dp"
+            android:text="School Of Drama"
+            android:textSize="18sp" />
 
 
     </LinearLayout>
@@ -88,15 +96,16 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
 
         <com.gifted.app.giftededucation.customviews.FontTextView
             android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:padding="@dimen/spot_size"
-            android:text="@string/app_name" />
+            android:text="@string/email"
+            android:textSize="18sp" />
 
         <View
             android:layout_width="10dp"
@@ -106,8 +115,11 @@
             android:id="@+id/email_"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/spot_size"
-            android:text="@string/app_name" />
+            android:padding="10dp"
+            android:paddingLeft="14dp"
+            android:paddingStart="14dp"
+            android:text="abhishekdubey331@gmail.com"
+            android:textSize="18sp" />
 
 
     </LinearLayout>

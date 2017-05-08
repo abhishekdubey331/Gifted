@@ -17,6 +17,7 @@ import com.greendao.db.DaoSession;
 import com.greendao.db.Question;
 import com.greendao.db.UserResponses;
 import com.thefinestartist.Base;
+import com.thefinestartist.utils.preferences.Pref;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -131,6 +132,7 @@ public class LoginUserRequest {
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray jsonArray = jsonObject.getJSONArray("Result");
                             Log.e("Values", "Hello");
+                            Pref.put("last", jsonArray.length());
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                                 questionList.add(new com.greendao.db.Question((long) i, Integer.parseInt(i + ""),

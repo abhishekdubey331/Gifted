@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.gifted.app.giftededucation.R;
 import com.gifted.app.giftededucation.interfaces.VolleyCallback;
 import com.gifted.app.giftededucation.requests.LoginUserRequest;
-import com.pixplicity.easyprefs.library.Prefs;
 import com.thefinestartist.Base;
 
 public class InstructionsActivity extends AppCompatActivity {
@@ -27,9 +26,9 @@ public class InstructionsActivity extends AppCompatActivity {
         TextView mTitle = (TextView) toolbarTop.findViewById(R.id.toolbar_title);
         instructions = (TextView) findViewById(R.id.fontTextView);
 
-        Prefs.clear();
-
         Button start_test = (Button) findViewById(R.id.start_test);
+
+
 
         LoginUserRequest loginUserRequest = new LoginUserRequest();
         loginUserRequest.get_questions("SJI", new VolleyCallback() {

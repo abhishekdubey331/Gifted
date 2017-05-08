@@ -25,12 +25,6 @@ dependencies {
     apt 'com.thefinestartist:compilers:0.9.5'
 }
 
-repositories {
-    maven { url "http://dl.bintray.com/pixplicity/maven" }
-}
-dependencies {
-    compile 'com.pixplicity.easyprefs:library:1.8.1@aar'
-}
 
 dependencies {
     compile 'com.android.support:support-v4:25.+'

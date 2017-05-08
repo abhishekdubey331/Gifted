@@ -23,6 +23,11 @@
     <string name="instruction_two">This is instruction two.</string>
     <string name="your_details">Your Details</string>
     <string name="submit">Submit</string>
+    <string name="proceed_submit">Proceed To Submit</string>
+    <string name="name">Name:</string>
+    <string name="classs">Class:</string>
+    <string name="school">School:</string>
+    <string name="email">Email:</string>
 
 
 </resources>
