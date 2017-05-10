@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gifted.app.giftededucation.Global;
 import com.gifted.app.giftededucation.R;
@@ -107,7 +106,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
                 selected_position = holder.getAdapterPosition();
                 notifyItemChanged(selected_position);
                 notifyItemChanged(get_position(userResponses.getUser_response()));
-               // Toast.makeText(Base.getContext(), "Right Answer is :" + right_answer, Toast.LENGTH_SHORT).show();
+                // Toast.makeText(Base.getContext(), "Right Answer is :" + right_answer, Toast.LENGTH_SHORT).show();
 
                 UserResponses userResponses = getAppDaoSession().getUserResponsesDao()
                         .queryBuilder().where(UserResponsesDao.Properties.Id.eq(question_number)).unique();
@@ -121,7 +120,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
                     other_details.put("max_marks", 4);
                     other_details.put("marks_secured", 40);
                     jsonarray.put(other_details);
-                    Pref.put("Response", Pref.get("Response","")+","+jsonarray.toString().replace("[", "").replace("]", ""));
+                    Pref.put("Response", Pref.get("Response", "") + "," + jsonarray.toString().replace("[", "").replace("]", ""));
 
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -1,12 +1,17 @@
 package com.gifted.app.giftededucation.activities;
 
+import android.annotation.TargetApi;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -46,8 +51,7 @@ public class TestActivity extends AppCompatActivity {
         pageAdapter = new MyPageAdapter(getSupportFragmentManager(), fragments);
         main_layout = (LinearLayout) findViewById(R.id.main_layout);
         timer = (TextView) findViewById(R.id.timer);
-        ViewPager pager =
-                (ViewPager) findViewById(R.id.viewpager);
+        ViewPager pager = (ViewPager) findViewById(R.id.viewpager);
         pager.setAdapter(pageAdapter);
 
         setCountDownTimer();
@@ -73,6 +77,7 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 timer.setText("Done..!!");
+                startActivity(new Intent(Base.getContext(), SubmissionActivity.class));
             }
         }.start();
 
@@ -101,20 +106,22 @@ public class TestActivity extends AppCompatActivity {
             case R.id.review_action:
 
                 if (showingFirst) {
-                    main_layout.setAlpha((float) 0.5);
                     ReviewFragment newFragment = new ReviewFragment();
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                     transaction.setCustomAnimations(R.anim.slide_in_left, 0, 0, R.anim.slide_out_right);
                     transaction.replace(R.id.container, newFragment);
                     transaction.addToBackStack(null);
                     transaction.commit();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            main_layout.setAlpha((float) 0.5);
+                        }
+                    }, 500);
 
                     showingFirst = false;
                 } else {
-                    main_layout.setAlpha(1);
-
-                    getSupportFragmentManager().popBackStack();
-                    showingFirst = true;
+                    removeFragment();
                 }
 
                 return true;
@@ -123,9 +130,25 @@ public class TestActivity extends AppCompatActivity {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    public void removeFragment() {
+        main_layout.setAlpha(1);
+
+
+        getSupportFragmentManager().popBackStack();
+        showingFirst = true;
+    }
+
     @Override
     public void onBackPressed() {
-
+        int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
+        if (backStackEntryCount == 0) {
+            Log.e(TAG, "Last");
+        } else {
+            main_layout.setAlpha(1);
+            showingFirst = true;
+            super.onBackPressed();
+        }
 
     }
 

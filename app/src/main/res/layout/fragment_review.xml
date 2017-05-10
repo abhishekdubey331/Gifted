@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="?attr/actionBarSize"
     android:background="#FFF"
     android:orientation="vertical"
     tools:context="com.gifted.app.giftededucation.fragments.ReviewFragment">
@@ -17,15 +18,15 @@
 
     <View
         android:layout_width="match_parent"
-        android:background="#ccc"
-        android:layout_height="1dp"/>
+        android:layout_height="1dp"
+        android:background="#ccc" />
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/review_recycler"
         android:layout_width="match_parent"
-        android:layout_marginTop="15dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:scrollbars="vertical" />
 
 
