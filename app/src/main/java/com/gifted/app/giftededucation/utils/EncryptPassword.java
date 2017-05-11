@@ -18,8 +18,8 @@ public class EncryptPassword {
 
             // Create Hex String
             StringBuffer hexString = new StringBuffer();
-            for (int i = 0; i < messageDigest.length; i++)
-                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+            for (byte aMessageDigest : messageDigest)
+                hexString.append(Integer.toHexString(0xFF & aMessageDigest));
             return hexString.toString();
 
         } catch (NoSuchAlgorithmException e) {

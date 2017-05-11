@@ -6,6 +6,14 @@ package com.gifted.app.giftededucation.utils;
 
 public class Config {
 
+    public static final String USER_NAME = "username";
+
+    public static final String KEY_SCORE = "score";
+
+    public static final String RESPONSE = "response";
+
+    public static final String USER_CLASS = "user_class";
+
     public static String KEY_EMAIL = "email";
 
     public static String KEY_EXAM_CODE = "exam_code";
@@ -29,13 +37,19 @@ public class Config {
 
     public static String KEY_LOGIN_URL = "http://35.167.89.23:8080/login";
 
+    public static String KEY_RESPONSE_URL = "http://35.167.89.23:8080/user_responses";
+
+
     public static String KEY_GET_QUE_URL = "http://35.167.89.23:8080/getQuestions";
 
     public static String S3_BASE_URL = "https://s3-us-west-2.amazonaws.com/giftededu/";
 
     public static String KEY__USER_TOKEN;
 
-    public static String KEY_USER_ID = "USER_ID";
+    public static String KEY_USER_ID = "user_id";
+
+    public static String RESPONSE_ID = "response_id";
+
 
     public static String KEY_EXAMS_ALLOWED;
 
@@ -49,6 +63,7 @@ public class Config {
     public static String IMAGE_TYPE = ".png";
 
     public static String DB_NAME = "giftedapp.db";
+
     public static String LEVEL = "level";
 
 }

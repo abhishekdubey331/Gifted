@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.gifted.app.giftededucation.R;
 import com.gifted.app.giftededucation.activities.SubmissionActivity;
+import com.gifted.app.giftededucation.activities.TestActivity;
 import com.gifted.app.giftededucation.adapters.AnswerAdapter;
 import com.gifted.app.giftededucation.utils.MakingJsonResponse;
 import com.thefinestartist.Base;
@@ -96,7 +97,7 @@ public class MyFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     MakingJsonResponse makingJsonResponse = new MakingJsonResponse();
-                    String respo = Pref.get("Response", "").replace("\\", "").substring(1);
+                    String respo = Pref.get("Response", "").replaceAll("\\\\", "").substring(1);
                     makingJsonResponse.makingJson("[" + respo + "]");
                     new AlertDialog.Builder(getContext())
                             .setTitle("Submit Test")
@@ -105,6 +106,7 @@ public class MyFragment extends Fragment {
                                 public void onClick(DialogInterface dialog, int which) {
                                     // continue with delete
                                     startActivity(new Intent(Base.getContext(), SubmissionActivity.class));
+                                    ((TestActivity) getContext()).finish();
                                 }
                             })
                             .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {

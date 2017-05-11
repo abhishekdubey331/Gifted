@@ -118,7 +118,6 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
                     other_details.put("right_answer", right_answer);
                     other_details.put("user_response", options_values[selected_position]);
                     other_details.put("max_marks", 4);
-                    other_details.put("marks_secured", 40);
                     jsonarray.put(other_details);
                     Pref.put("Response", Pref.get("Response", "") + "," + jsonarray.toString().replace("[", "").replace("]", ""));
 

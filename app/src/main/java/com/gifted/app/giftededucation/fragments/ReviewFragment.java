@@ -13,7 +13,9 @@ import android.widget.TextView;
 
 import com.gifted.app.giftededucation.R;
 import com.gifted.app.giftededucation.adapters.OptionsAdapter;
+import com.gifted.app.giftededucation.utils.Config;
 import com.thefinestartist.Base;
+import com.thefinestartist.utils.preferences.Pref;
 
 public class ReviewFragment extends Fragment {
 
@@ -36,8 +38,8 @@ public class ReviewFragment extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(optionsAdapter);
-        name_user.setText("Abhishek Dubey");
-        user_class.setText("Class : 8");
+        name_user.setText(Pref.get(Config.USER_NAME, ""));
+        user_class.setText("Class:" + Pref.get(Config.USER_CLASS, ""));
 
 
         return rootView;

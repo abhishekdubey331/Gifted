@@ -78,6 +78,7 @@ public class TestActivity extends AppCompatActivity {
             public void onFinish() {
                 timer.setText("Done..!!");
                 startActivity(new Intent(Base.getContext(), SubmissionActivity.class));
+                finish();
             }
         }.start();
 

@@ -9,7 +9,7 @@ import android.widget.EditText;
  * Created by DIC on 4/6/2017.
  */
 
-public class CustomEditText extends EditText {
+public class CustomEditText extends android.support.v7.widget.AppCompatEditText {
 
 
     private Context context;

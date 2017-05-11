@@ -1,6 +1,8 @@
 package com.gifted.app.giftededucation.adapters;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -64,6 +66,7 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.MyViewHo
 
         }
 
+        @TargetApi(Build.VERSION_CODES.GINGERBREAD)
         @Override
         public void onClick(View v) {
             viewPager.setCurrentItem(getAdapterPosition());

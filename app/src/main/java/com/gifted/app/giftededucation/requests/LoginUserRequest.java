@@ -188,6 +188,46 @@ public class LoginUserRequest {
         requestQueue.add(stringRequest);
     }
 
+    public void sendResponse(String response, final VolleyCallback callback) {
+        //Getting values from edit texts
+        final String responses = response;
+
+        //Creating a string request
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.KEY_RESPONSE_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        callback.onSuccessResponse(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //You can handle error here if you want
+                        Log.e("Error", "Error in sending user response" + error.getMessage());
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                //Adding parameters to request
+
+                params.put(Config.KEY_USER_ID, Pref.get(Config.KEY_USER_ID, ""));
+                params.put(Config.KEY_EXAM_CODE, Pref.get(Config.LEVEL, ""));
+                params.put(Config.RESPONSE, responses);
+               // params.put(Config.KEY__USER_TOKEN, Pref.get(Config.KEY__USER_TOKEN, ""));
+
+                //returning parameter
+                return params;
+            }
+        };
+
+        //Adding the string request to the queue
+        RequestQueue requestQueue = Volley.newRequestQueue(Base.getContext());
+        requestQueue.add(stringRequest);
+    }
+
+
     private DaoSession getAppDaoSession() {
         return ((Global) Base.getContext()).getSession();
     }
