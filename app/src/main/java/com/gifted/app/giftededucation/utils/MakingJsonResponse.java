@@ -1,8 +1,12 @@
 package com.gifted.app.giftededucation.utils;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.gifted.app.giftededucation.Global;
+import com.gifted.app.giftededucation.activities.SubmissionActivity;
+import com.gifted.app.giftededucation.activities.TestActivity;
 import com.gifted.app.giftededucation.interfaces.VolleyCallback;
 import com.gifted.app.giftededucation.requests.LoginUserRequest;
 import com.greendao.db.DaoSession;
@@ -20,8 +24,11 @@ import org.json.JSONObject;
  */
 
 public class MakingJsonResponse {
+    private Context mContext;
+    private int count = 0;
 
-    public MakingJsonResponse() {
+    public MakingJsonResponse(Context mContext) {
+        this.mContext = mContext;
     }
 
 
@@ -47,7 +54,7 @@ public class MakingJsonResponse {
 
 
     public void makingJson(String jsonObject) {
-        int count = 0;
+
         JSONObject user_id = new JSONObject();
         try {
             for (int i = 0; i < Pref.get("last", 30); i++) {
@@ -67,12 +74,36 @@ public class MakingJsonResponse {
                 @Override
                 public void onSuccessResponse(String result) {
                     Log.e("Response", result);
+                    calculateUserResult(count);
+
+
                 }
             });
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void calculateUserResult(int marks_obtained) {
+        int total_marks = 4 * Pref.get("last", 30);
+        String result_status = "Not Qualified";
+        int percentage = 90;
+        Log.e("Precentage", percentage + "total" + total_marks);
+        if (percentage > 80) {
+            result_status = "Qualified";
+        }
+        LoginUserRequest loginUserRequest = new LoginUserRequest();
+        loginUserRequest.send_User_Result(marks_obtained, percentage, result_status, new VolleyCallback() {
+            @Override
+            public void onSuccessResponse(String result) {
+                Log.e("Response", result);
+
+                Base.getContext().startActivity(new Intent(Base.getContext(), SubmissionActivity.class));
+                ((TestActivity) mContext).finish();
+            }
+        });
+
     }
 
     private DaoSession getAppDaoSession() {

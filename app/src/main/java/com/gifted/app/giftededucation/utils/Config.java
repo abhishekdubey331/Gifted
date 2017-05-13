@@ -13,6 +13,11 @@ public class Config {
     public static final String RESPONSE = "response";
 
     public static final String USER_CLASS = "user_class";
+    public static final String KEY_MARKS_OBTAINED = "marks_obtained";
+    public static final String KEY_PERCENTAGE = "percentage";
+    public static final String KEY_RESULT = "result";
+
+    public static final String KEY_USER_RESULT_URL = "http://35.167.89.23:8080/user_result";
 
     public static String KEY_EMAIL = "email";
 

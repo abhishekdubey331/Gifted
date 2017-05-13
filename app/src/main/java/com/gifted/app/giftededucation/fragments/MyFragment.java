@@ -96,17 +96,16 @@ public class MyFragment extends Fragment {
             proceed.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MakingJsonResponse makingJsonResponse = new MakingJsonResponse();
-                    String respo = Pref.get("Response", "").replaceAll("\\\\", "").substring(1);
-                    makingJsonResponse.makingJson("[" + respo + "]");
+
                     new AlertDialog.Builder(getContext())
                             .setTitle("Submit Test")
                             .setMessage("Are you sure you have completed your test?")
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     // continue with delete
-                                    startActivity(new Intent(Base.getContext(), SubmissionActivity.class));
-                                    ((TestActivity) getContext()).finish();
+                                    MakingJsonResponse makingJsonResponse = new MakingJsonResponse(getContext());
+                                    String respo = Pref.get("Response", "").replaceAll("\\\\", "").substring(1);
+                                    makingJsonResponse.makingJson("[" + respo + "]");
                                 }
                             })
                             .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {

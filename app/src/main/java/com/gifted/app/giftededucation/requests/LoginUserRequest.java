@@ -215,7 +215,57 @@ public class LoginUserRequest {
                 params.put(Config.KEY_USER_ID, Pref.get(Config.KEY_USER_ID, ""));
                 params.put(Config.KEY_EXAM_CODE, Pref.get(Config.LEVEL, ""));
                 params.put(Config.RESPONSE, responses);
-               // params.put(Config.KEY__USER_TOKEN, Pref.get(Config.KEY__USER_TOKEN, ""));
+                // params.put(Config.KEY__USER_TOKEN, Pref.get(Config.KEY__USER_TOKEN, ""));
+
+                //returning parameter
+                return params;
+            }
+        };
+
+        //Adding the string request to the queue
+        RequestQueue requestQueue = Volley.newRequestQueue(Base.getContext());
+        requestQueue.add(stringRequest);
+    }
+
+
+    public void send_User_Result(int marks_obtained, int percentage, String result, final VolleyCallback callback) {
+        //Getting values from edit texts
+        final String marks_obtainedd = String.valueOf(marks_obtained);
+
+        final String percentage_ = String.valueOf(percentage);
+
+        final String result_ = result;
+
+        Log.e("All Data", percentage_ + "\n" + marks_obtainedd + "\n" + result_);
+
+        //Creating a string request
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.KEY_USER_RESULT_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        callback.onSuccessResponse(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //You can handle error here if you want
+                        Log.e("Error", "Error in sending user response" + error.getMessage());
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                //Adding parameters to request
+
+                params.put(Config.KEY_USER_ID, Pref.get(Config.KEY_USER_ID, ""));
+                params.put(Config.KEY_EXAM_CODE, Pref.get(Config.LEVEL, ""));
+                params.put(Config.KEY_MARKS_OBTAINED, marks_obtainedd);
+                params.put(Config.KEY_PERCENTAGE, percentage_);
+                params.put(Config.KEY_RESULT, result_);
+
+
+                // params.put(Config.KEY__USER_TOKEN, Pref.get(Config.KEY__USER_TOKEN, ""));
 
                 //returning parameter
                 return params;

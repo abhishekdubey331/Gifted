@@ -1,8 +1,10 @@
 package com.gifted.app.giftededucation.activities;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -31,7 +33,7 @@ public class SubmissionActivity extends AppCompatActivity {
     private void set_card() {
         Typeface typeface;
 
-        Button submit = (Button) findViewById(R.id.submit_);
+        Button submit = (Button) findViewById(R.id.logout);
         TextView name_ = (TextView) findViewById(R.id.name_);
 
         TextView classs_ = (TextView) findViewById(R.id.classs_);
@@ -39,6 +41,13 @@ public class SubmissionActivity extends AppCompatActivity {
         TextView email_ = (TextView) findViewById(R.id.email_);
         typeface = Typeface.createFromAsset(Base.getAssets(), "fonts/MuseoSans_500.otf");
         submit.setTypeface(typeface);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Base.getContext(), LogInActivity.class));
+                finish();
+            }
+        });
 
 
         try {
