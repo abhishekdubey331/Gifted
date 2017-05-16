@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="start"
+    android:layout_margin="10dp"
+    android:layout_marginTop="@dimen/viewpager_padding">
+
+    <com.gifted.app.giftededucation.customviews.FontTextView
+        android:id="@+id/options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/state_list_drawable"
+        android:gravity="start"
+        android:padding="15dp"
+        android:text="a.)"
+        android:textColor="#404040"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/answer_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp"
+        android:adjustViewBounds="true"
+        android:gravity="start"
+        android:padding="10dp" />
+
+
+</LinearLayout>
