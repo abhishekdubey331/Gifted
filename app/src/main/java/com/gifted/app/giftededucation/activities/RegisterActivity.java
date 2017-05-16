@@ -1,6 +1,7 @@
 package com.gifted.app.giftededucation.activities;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,6 +35,9 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText input_name, input_school, input_district, input_state, input_email, input_password, input_mobile;
     private int student_class;
     private String[] class_array = {"5", "6", "7", "8", "9", "10"};
+    private TextView instructions;
+    private Boolean let_registration = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +45,35 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         generate_all_views();
         Spinner spinnerCustom = (Spinner) findViewById(R.id.spinnerCustom);
+        TextView terms_conditions = (TextView) findViewById(R.id.terms_conditions);
+        terms_conditions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new android.support.v7.app.AlertDialog.Builder(RegisterActivity.this)
+                        .setTitle(R.string.terms)
+                        .setMessage(R.string.conditions)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // continue with delete
+                            }
+                        })
+                        .show();
+            }
+        });
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 boolean fieldsOK = validate(new EditText[]{input_name, input_school, input_district, input_state, input_email, input_password, input_mobile});
 
-                if (fieldsOK) {
+                if (fieldsOK && let_registration) {
                     setFields();
                 } else {
-                    Toast.makeText(RegisterActivity.this, "Fill Fields Correctly", Toast.LENGTH_SHORT).show();
+                    if (let_registration)
+                        Toast.makeText(RegisterActivity.this, "Fill Fields Correctly", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(RegisterActivity.this, "Accept Terms & Conditions", Toast.LENGTH_SHORT).show();
+
                 }
 
             }
@@ -142,6 +166,14 @@ public class RegisterActivity extends AppCompatActivity {
         }
         return true;
 
+    }
+
+    public void itemClicked(View v) {
+        //code to check if this checkbox is checked!
+        CheckBox checkBox = (CheckBox) v;
+        if (checkBox.isChecked()) {
+            let_registration = true;
+        }
     }
 
 

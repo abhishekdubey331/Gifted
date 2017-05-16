@@ -22,6 +22,7 @@ import com.gifted.app.giftededucation.Global;
 import com.gifted.app.giftededucation.R;
 import com.gifted.app.giftededucation.adapters.MyPageAdapter;
 import com.gifted.app.giftededucation.fragments.MyFragment;
+import com.gifted.app.giftededucation.fragments.MyFragment2;
 import com.gifted.app.giftededucation.fragments.ReviewFragment;
 import com.greendao.db.DaoSession;
 import com.greendao.db.Question;
@@ -89,7 +90,13 @@ public class TestActivity extends AppCompatActivity {
         List<Question> questionList = getAppDaoSession().getQuestionDao().loadAll();
         for (Question question : questionList) {
             System.out.println(question);
-            fList.add(MyFragment.newInstance(question.getOption_json(), question.getQuestion(), question.getImage(), question.getId() + "", question.getAnswer()));
+            if (question.getQ_code().contentEquals("QTX")) {
+                fList.add(MyFragment.newInstance(question.getOption_json(), question.getQuestion(), question.getImage(), question.getId() + "", question.getAnswer()));
+
+            } else {
+                fList.add(MyFragment2.newInstance(question.getOption_json(), question.getQuestion(), question.getImage(), question.getId() + "", question.getAnswer()));
+
+            }
 
         }
         return fList;

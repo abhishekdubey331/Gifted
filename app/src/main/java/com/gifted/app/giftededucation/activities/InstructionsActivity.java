@@ -1,7 +1,9 @@
 package com.gifted.app.giftededucation.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -16,7 +18,7 @@ import com.thefinestartist.Base;
 public class InstructionsActivity extends AppCompatActivity {
 
     private static final String TAG = Splash.class.getName();
-    private TextView instructions;
+    private TextView instructions,terms_conditions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +26,9 @@ public class InstructionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_instructions);
         Toolbar toolbarTop = (Toolbar) findViewById(R.id.toolbar_top);
         TextView mTitle = (TextView) toolbarTop.findViewById(R.id.toolbar_title);
+        mTitle.setText("Instructions");
         instructions = (TextView) findViewById(R.id.fontTextView);
+
 
         Button start_test = (Button) findViewById(R.id.start_test);
 

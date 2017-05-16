@@ -1,6 +1,7 @@
 package com.gifted.app.giftededucation.adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,13 @@ import com.bumptech.glide.Glide;
 import com.gifted.app.giftededucation.R;
 import com.gifted.app.giftededucation.utils.Config;
 import com.thefinestartist.Base;
+import com.thefinestartist.utils.preferences.Pref;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class LevelsAdapter extends RecyclerView.Adapter<LevelsAdapter.ViewHolder> {
@@ -17,6 +25,8 @@ public class LevelsAdapter extends RecyclerView.Adapter<LevelsAdapter.ViewHolder
 
 
     public LevelsAdapter() {
+
+
     }
 
     @Override

@@ -70,9 +70,13 @@ public class LogInActivity extends AppCompatActivity {
 
                                 Gson gson = new Gson();
                                 String save = gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0).getJSONArray("levels_allowed"));
+                                Log.e(TAG,save);
                                 Pref.put(Config.KEY_EXAMS_ALLOWED, save);
+                                save = gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0).getJSONArray("levels_taken"));
+                                Pref.put(Config.KEY_EXAMS_TAKEN, save);
+                                Log.e(TAG,save);
                                 Pref.put(Config.USER_OBJECT, gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0)));
-                                Pref.put(Config.USER_OBJECT, gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0)));
+                               // Pref.put(Config.USER_OBJECT, gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0)));
                                 Pref.put(Config.USER_NAME, jsonObject.getJSONArray("userDetails").getJSONObject(0).getString("name"));
                                 Pref.put(Config.USER_CLASS, jsonObject.getJSONArray("userDetails").getJSONObject(0).getString("class"));
 

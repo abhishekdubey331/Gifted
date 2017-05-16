@@ -15,6 +15,7 @@ import com.gifted.app.giftededucation.R;
 import com.greendao.db.DaoSession;
 import com.greendao.db.UserResponses;
 import com.greendao.db.UserResponsesDao;
+import com.squareup.picasso.Picasso;
 import com.thefinestartist.Base;
 import com.thefinestartist.utils.preferences.Pref;
 
@@ -37,9 +38,13 @@ public class ImageAnswerAdapter extends RecyclerView.Adapter<ImageAnswerAdapter.
     private String right_answer;
 
     private int question_number;
+
     private JSONObject responses_obj;
+
     private JSONObject other_details;
+
     private JSONArray jsonarray;
+
 
 
     public ImageAnswerAdapter(int length, JSONObject jsonObject, String rightAnswer, int question) {
@@ -62,7 +67,8 @@ public class ImageAnswerAdapter extends RecyclerView.Adapter<ImageAnswerAdapter.
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-       
+        Picasso.with(Base.getContext()).load("http://i.imgur.com/DvpvklR.png").into(holder.answer_image);
+
     }
 
     @Override

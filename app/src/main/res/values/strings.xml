@@ -19,7 +19,11 @@
     <string name="sample_answer">He is called Ugly</string>
     <string name="instructio_note">Please read the instructions carefully:</string>
     <string name="instructions">Instructions</string>
-    <string name="instruction_one">This is instruction one for users.</string>
+    <string name="instruction_one">●This test consist questions from Science and Mathematics sections.\n●There will be 30 questions and 60 minutes will be given to attempt the test, with
+4 marks each.\n●Each question has four options.Each section is compulsory.\n●Only one option is correct, you have to click the correct option.\n●There is no negative marking i.e there will be no deduction of marks if you clicks a
+wrong answer.\n●At the end of test, screen will automatically present the preview about number of
+questions attempted and unattempted.\n●You are allowed to reselect the options while taking the test only.\n●You wouldn’t be
+allowed to make any further changes after final submission of the test.\n●If you secures 80% or more, only then you will qualify for next level of test. </string>
     <string name="instruction_two">This is instruction two.</string>
     <string name="your_details">Your Details</string>
     <string name="submit">Logout</string>
@@ -28,6 +32,11 @@
     <string name="classs">Class:</string>
     <string name="school">School:</string>
     <string name="email">Email:</string>
+    <string name="agree"><![CDATA[I agree to]]></string>
+    <string name="terms"><![CDATA[Terms & Conditions]]></string>
+    <string name="conditions">Information provided during registration process is assumed to be true any discrepancies in information will
+ disqualify your candidature.\nBy clicking,I agree to accept the terms and conditions of test that I am studying in same class
+ as mentioned while registration and I have registered only once.</string>
 
 
 </resources>

@@ -56,7 +56,9 @@ public class Config {
     public static String RESPONSE_ID = "response_id";
 
 
-    public static String KEY_EXAMS_ALLOWED;
+    public static String KEY_EXAMS_ALLOWED="exams_allowed";
+
+    public static String KEY_EXAMS_TAKEN="exams_taken";
 
     public static String USER_OBJECT = "user_obj";
 
