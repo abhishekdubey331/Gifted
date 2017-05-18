@@ -57,7 +57,7 @@ public class MakingJsonResponse {
 
         JSONObject user_id = new JSONObject();
         try {
-            for (int i = 0; i < Pref.get("last", 30); i++) {
+            for (int i = 0; i < Pref.get(Config.KEY_LAST_QUE, 30); i++) {
                 count = count + getTotalScore(i);
             }
             Pref.put("UserScore", count);

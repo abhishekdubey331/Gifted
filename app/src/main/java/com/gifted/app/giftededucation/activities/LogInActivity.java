@@ -29,7 +29,7 @@ import org.json.JSONObject;
 import dmax.dialog.SpotsDialog;
 
 public class LogInActivity extends AppCompatActivity {
-    private static final String TAG = RegisterActivity.class.getName();
+    private static final String TAG = LogInActivity.class.getName();
 
 
     @Override
@@ -61,26 +61,32 @@ public class LogInActivity extends AppCompatActivity {
 
                             spotsDialog.dismiss();
                             Log.e(TAG, result);
+
                             try {
                                 JSONObject jsonObject = new JSONObject(result);
-                                String user_id = jsonObject.getJSONArray("userDetails").getJSONObject(0).getString("user_id");
-                                Pref.put(Config.KEY__USER_TOKEN, jsonObject.getString("token"));
-                                Pref.put(Config.KEY_USER_ID, user_id);
+                                if (jsonObject.get("success").toString().contentEquals("true")) {
+                                    String user_id = jsonObject.getJSONArray("userDetails").getJSONObject(0).getString("user_id");
+                                    Pref.put(Config.KEY__USER_TOKEN, jsonObject.getString("token"));
+                                    Pref.put(Config.KEY_USER_ID, user_id);
 
 
-                                Gson gson = new Gson();
-                                String save = gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0).getJSONArray("levels_allowed"));
-                                Log.e(TAG,save);
-                                Pref.put(Config.KEY_EXAMS_ALLOWED, save);
-                                save = gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0).getJSONArray("levels_taken"));
-                                Pref.put(Config.KEY_EXAMS_TAKEN, save);
-                                Log.e(TAG,save);
-                                Pref.put(Config.USER_OBJECT, gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0)));
-                               // Pref.put(Config.USER_OBJECT, gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0)));
-                                Pref.put(Config.USER_NAME, jsonObject.getJSONArray("userDetails").getJSONObject(0).getString("name"));
-                                Pref.put(Config.USER_CLASS, jsonObject.getJSONArray("userDetails").getJSONObject(0).getString("class"));
+                                    Gson gson = new Gson();
+                                    String save = gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0).getJSONArray("levels_allowed"));
+                                    Log.e(TAG, save);
+                                    Pref.put(Config.KEY_EXAMS_ALLOWED, save);
+                                    save = gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0).getJSONArray("levels_taken"));
+                                    Pref.put(Config.KEY_EXAMS_TAKEN, save);
+                                    Log.e(TAG, save);
+                                    Pref.put(Config.USER_OBJECT, gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0)));
+                                    // Pref.put(Config.USER_OBJECT, gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0)));
+                                    Pref.put(Config.USER_NAME, jsonObject.getJSONArray("userDetails").getJSONObject(0).getString("name"));
+                                    Pref.put(Config.USER_CLASS, jsonObject.getJSONArray("userDetails").getJSONObject(0).getString("class"));
 
-                                startActivity(new Intent(Base.getContext(), LevelsActivity.class));
+                                    startActivity(new Intent(Base.getContext(), LevelsActivity.class));
+
+                                } else {
+                                    Toast.makeText(LogInActivity.this, "Wrong Username Or Password", Toast.LENGTH_SHORT).show();
+                                }
 
                             } catch (JSONException e) {
                                 e.printStackTrace();

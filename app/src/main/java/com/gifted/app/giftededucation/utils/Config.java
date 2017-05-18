@@ -19,6 +19,8 @@ public class Config {
 
     public static final String KEY_USER_RESULT_URL = "http://35.167.89.23:8080/user_result";
 
+    public static final String KEY_LAST_QUE = "last" ;
+
     public static String KEY_EMAIL = "email";
 
     public static String KEY_EXAM_CODE = "exam_code";

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,61 +7,51 @@
     android:orientation="vertical"
     tools:context="com.gifted.app.giftededucation.activities.SubmissionActivity">
 
-    <ImageView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/header_submit" />
+        android:orientation="vertical"
+        android:paddingBottom="100dp">
 
-    <!--<android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="12dp">
-
-        <LinearLayout
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="top"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/header_submit" />
 
-            android:background="#FFF"
-            android:orientation="vertical"
-            android:padding="@dimen/fab_margin">
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/chart1"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:paddingBottom="100dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin">
+
 
             <com.gifted.app.giftededucation.customviews.FontTextView
-                android:layout_width="wrap_content"
+                android:id="@+id/score_text"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:padding="12dp"
-                android:text="@string/your_details"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="@dimen/fab_margin"
                 android:textColor="#404040"
-                android:textSize="22sp" />
+                android:textSize="20sp" />
 
-            <include layout="@layout/row_card_id" />
-        </LinearLayout>
+        </android.support.v7.widget.CardView>
 
-    </android.support.v7.widget.CardView>
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/top_margin"
-        android:background="@drawable/button_round"
-        android:padding="@dimen/fab_margin"
-        android:text="@string/submit"
-        android:textColor="#fff"
-        android:textSize="20sp" />
--->
 
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/chart1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp" />
-
-</LinearLayout>
+</ScrollView>
