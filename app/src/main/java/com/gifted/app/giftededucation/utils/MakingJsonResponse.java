@@ -99,7 +99,7 @@ public class MakingJsonResponse {
             public void onSuccessResponse(String result) {
                 Log.e("Response", result);
 
-                Base.getContext().startActivity(new Intent(Base.getContext(), SubmissionActivity.class));
+                Base.getContext().startActivity(new Intent(Base.getContext(), SubmissionActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 ((TestActivity) mContext).finish();
             }
         });

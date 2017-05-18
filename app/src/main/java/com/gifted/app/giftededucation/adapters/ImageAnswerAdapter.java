@@ -67,6 +67,7 @@ public class ImageAnswerAdapter extends RecyclerView.Adapter<ImageAnswerAdapter.
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
+
         Picasso.with(Base.getContext()).load("http://i.imgur.com/DvpvklR.png").into(holder.answer_image);
 
     }

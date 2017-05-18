@@ -3,6 +3,7 @@ package com.gifted.app.giftededucation.requests;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -271,6 +272,9 @@ public class LoginUserRequest {
                 return params;
             }
         };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(25000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         //Adding the string request to the queue
         RequestQueue requestQueue = Volley.newRequestQueue(Base.getContext());

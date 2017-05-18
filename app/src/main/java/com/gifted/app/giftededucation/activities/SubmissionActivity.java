@@ -1,36 +1,70 @@
 package com.gifted.app.giftededucation.activities;
 
-import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.gifted.app.giftededucation.R;
-import com.gifted.app.giftededucation.utils.Config;
-import com.thefinestartist.Base;
-import com.thefinestartist.utils.preferences.Pref;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.util.ArrayList;
 
 public class SubmissionActivity extends AppCompatActivity {
 
     private static final String TAG = SubmissionActivity.class.getSimpleName();
+    PieChart pieChart;
+    ArrayList<Entry> entries;
+    ArrayList<String> PieEntryLabels;
+    PieDataSet pieDataSet;
+    PieData pieData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submission);
-        set_card();
+        pieChart = (PieChart) findViewById(R.id.chart1);
 
+        entries = new ArrayList<>();
+
+        PieEntryLabels = new ArrayList<String>();
+
+        AddValuesToPIEENTRY();
+
+        AddValuesToPieEntryLabels();
+
+        pieDataSet = new PieDataSet(entries, "");
+
+        pieData = new PieData(PieEntryLabels, pieDataSet);
+
+        pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+
+        pieChart.setData(pieData);
+
+        pieChart.animateY(3000);
 
     }
 
+    public void AddValuesToPIEENTRY() {
 
-    private void set_card() {
+        entries.add(new BarEntry(2f, 0));
+        entries.add(new BarEntry(4f, 1));
+        entries.add(new BarEntry(6f, 2));
+        entries.add(new BarEntry(8f, 3));
+
+    }
+
+    public void AddValuesToPieEntryLabels() {
+        PieEntryLabels.add("Attempted");
+        PieEntryLabels.add("Correct");
+        PieEntryLabels.add("Incorrect");
+        PieEntryLabels.add("Unattempted");
+    }
+
+   /* private void set_card() {
         Typeface typeface;
 
         Button submit = (Button) findViewById(R.id.logout);
@@ -61,7 +95,7 @@ public class SubmissionActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
 
 }
