@@ -81,6 +81,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
                 holder.options.setBackgroundColor(Color.parseColor("#FFC80D"));
                 holder.answers.setTextColor(Color.parseColor("#FFFFFF"));
                 holder.options.setTextColor(Color.parseColor("#FFFFFF"));
+
             }
         }
 

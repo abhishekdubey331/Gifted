@@ -37,6 +37,10 @@ allowed to make any further changes after final submission of the test.\n●If y
     <string name="conditions">Information provided during registration process is assumed to be true any discrepancies in information will
  disqualify your candidature.\nBy clicking,I agree to accept the terms and conditions of test that I am studying in same class
  as mentioned while registration and I have registered only once.</string>
+    <string name="app_name2">SMAT APP</string>
+    <string name="smat_content">&#160;&#160;&#160;&#160;&#160;Initiative by the office of
+        \nPrincipal Scientific Advisor to
+        \n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Govt. of India</string>
 
 
 </resources>

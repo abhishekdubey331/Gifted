@@ -20,22 +20,13 @@ public class Splash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        Toolbar toolbarTop = (Toolbar) findViewById(R.id.toolbar_top);
-        TextView mTitle = (TextView) toolbarTop.findViewById(R.id.toolbar_title);
         Pref.clear();
-        /*LoginUserRequest loginUserRequest = new LoginUserRequest();
-        loginUserRequest.sendResponse("h", new VolleyCallback() {
-            @Override
-            public void onSuccessResponse(String result) {
-                Log.e("Splash", result);
-            }
-        });*/
-
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(Splash.this, LogInActivity.class));
+               // startActivity(new Intent(Splash.this, LogInActivity.class));
+               // finish();
 
             }
         }, 2500);
