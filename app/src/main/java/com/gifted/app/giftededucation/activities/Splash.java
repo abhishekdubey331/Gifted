@@ -4,13 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.widget.TextView;
 
 import com.gifted.app.giftededucation.R;
-import com.gifted.app.giftededucation.interfaces.VolleyCallback;
-import com.gifted.app.giftededucation.requests.LoginUserRequest;
 import com.thefinestartist.utils.preferences.Pref;
 
 public class Splash extends AppCompatActivity {
@@ -25,8 +20,8 @@ public class Splash extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-               // startActivity(new Intent(Splash.this, LogInActivity.class));
-               // finish();
+                startActivity(new Intent(Splash.this, LogInActivity.class));
+                finish();
 
             }
         }, 2500);

@@ -30,6 +30,7 @@ public class InstructionsActivity extends AppCompatActivity {
         instructions = (TextView) findViewById(R.id.fontTextView);
 
 
+
         Button start_test = (Button) findViewById(R.id.start_test);
 
 
@@ -45,12 +46,14 @@ public class InstructionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Base.getContext(), TestActivity.class));
+                finish();
             }
         });
         instructions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Base.getContext(), TestActivity.class));
+                finish();
 
             }
         });
