@@ -27,6 +27,7 @@ import org.json.JSONObject;
 public class ImageAnswerAdapter extends RecyclerView.Adapter<ImageAnswerAdapter.MyViewHolder> {
 
     private String[] options_array = {"a.)", "b.)", "c.)", "d.)", "e.)", "f.)"};
+
     private String[] options_values = {"a", "b", "c", "d", "e", "f"};
 
     private int selected_position = -1;
