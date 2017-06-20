@@ -33,7 +33,6 @@ public class SubmissionActivity extends AppCompatActivity {
         pieChart = (PieChart) findViewById(R.id.chart1);
         score_text=(TextView)findViewById(R.id.score_text);
 
-
         entries = new ArrayList<>();
 
         PieEntryLabels = new ArrayList<String>();
@@ -65,7 +64,6 @@ public class SubmissionActivity extends AppCompatActivity {
     }
 
     public void AddValuesToPieEntryLabels() {
-
         PieEntryLabels.add("Correct");
         PieEntryLabels.add("Incorrect");
     }

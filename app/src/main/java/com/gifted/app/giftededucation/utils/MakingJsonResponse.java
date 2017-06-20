@@ -1,10 +1,13 @@
 package com.gifted.app.giftededucation.utils;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
 import com.gifted.app.giftededucation.Global;
+import com.gifted.app.giftededucation.R;
+import com.gifted.app.giftededucation.activities.LogInActivity;
 import com.gifted.app.giftededucation.activities.SubmissionActivity;
 import com.gifted.app.giftededucation.activities.TestActivity;
 import com.gifted.app.giftededucation.interfaces.VolleyCallback;
@@ -18,6 +21,8 @@ import com.thefinestartist.utils.preferences.Pref;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import dmax.dialog.SpotsDialog;
 
 /**
  * Created by DIC on 5/8/2017.
@@ -51,19 +56,14 @@ public class MakingJsonResponse {
         }
 
     }
-
-
     public void makingJson(String jsonObject) {
-
         JSONObject user_id = new JSONObject();
         try {
             for (int i = 0; i < Pref.get(Config.KEY_LAST_QUE, 30); i++) {
                 count = count + getTotalScore(i);
             }
             Pref.put("UserScore", count);
-           /* user_id.put("user_id", Pref.get("user_id", ""));
-            user_id.put("exam_code", Pref.get(Config.LEVEL, ""));
-*/
+
             user_id.put("responses", jsonObject);
             JSONArray jsonArray = new JSONArray();
             jsonArray.put(user_id);
@@ -75,8 +75,8 @@ public class MakingJsonResponse {
                 public void onSuccessResponse(String result) {
                     Log.e("Response", result);
                     calculateUserResult(count);
-
-
+                    Base.getContext().startActivity(new Intent(Base.getContext(), SubmissionActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    ((TestActivity) mContext).finish();
                 }
             });
 
@@ -88,7 +88,7 @@ public class MakingJsonResponse {
     private void calculateUserResult(int marks_obtained) {
         int total_marks = 4 * Pref.get("last", 30);
         String result_status = "Not Qualified";
-        double percentage = (((double) marks_obtained) / total_marks)*1004;
+        double percentage = (((double) marks_obtained) / total_marks)*100;
 
         Log.e("Precentage", percentage + "total" + total_marks);
         if (percentage > 80) {
@@ -99,9 +99,6 @@ public class MakingJsonResponse {
             @Override
             public void onSuccessResponse(String result) {
                 Log.e("Response", result);
-
-                Base.getContext().startActivity(new Intent(Base.getContext(), SubmissionActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                ((TestActivity) mContext).finish();
             }
         });
 
