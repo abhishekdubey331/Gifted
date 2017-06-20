@@ -24,9 +24,11 @@ import com.gifted.app.giftededucation.adapters.MyPageAdapter;
 import com.gifted.app.giftededucation.fragments.MyFragment;
 import com.gifted.app.giftededucation.fragments.MyFragment2;
 import com.gifted.app.giftededucation.fragments.ReviewFragment;
+import com.gifted.app.giftededucation.utils.Config;
 import com.greendao.db.DaoSession;
 import com.greendao.db.Question;
 import com.thefinestartist.Base;
+import com.thefinestartist.utils.preferences.Pref;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +38,7 @@ public class TestActivity extends AppCompatActivity {
     boolean showingFirst = true;
     LinearLayout main_layout;
     private static final String TAG = TestActivity.class.getName();
-    private TextView timer;
+    private TextView timer,test_level;
 
 
     @Override
@@ -47,6 +49,8 @@ public class TestActivity extends AppCompatActivity {
         setSupportActionBar(toolbarTop);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         TextView mTitle = (TextView) toolbarTop.findViewById(R.id.toolbar_title);
+        test_level=(TextView)findViewById(R.id.test_level);
+        test_level.setText("Level:"+Pref.get(Config.LEVEL,"SJI"));
 
         List<Fragment> fragments = getFragments();
         pageAdapter = new MyPageAdapter(getSupportFragmentManager(), fragments);
@@ -56,6 +60,7 @@ public class TestActivity extends AppCompatActivity {
         pager.setAdapter(pageAdapter);
 
         setCountDownTimer();
+
     }
 
     private void setCountDownTimer() {

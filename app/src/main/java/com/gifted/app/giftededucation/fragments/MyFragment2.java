@@ -17,7 +17,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gifted.app.giftededucation.R;
+import com.gifted.app.giftededucation.adapters.AnswerAdapter;
 import com.gifted.app.giftededucation.adapters.ImageAnswerAdapter;
+import com.gifted.app.giftededucation.adapters.OptionsAdapter;
 import com.gifted.app.giftededucation.utils.Config;
 import com.gifted.app.giftededucation.utils.MakingJsonResponse;
 import com.squareup.picasso.Picasso;
@@ -80,7 +82,7 @@ public class MyFragment2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ImageAnswerAdapter mAdapter;
+        AnswerAdapter mAdapter;
         TextView question, question_number;
         Button proceed;
         Typeface typeface;
@@ -150,7 +152,7 @@ public class MyFragment2 extends Fragment {
         }
 
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.answers_recycler);
-        mAdapter = new ImageAnswerAdapter(jsonObject != null ? jsonObject.length() : 0, jsonObject, getRight_answer, Integer.parseInt(que_number_));
+        mAdapter = new AnswerAdapter(jsonObject != null ? jsonObject.length() : 0, jsonObject, getRight_answer, Integer.parseInt(que_number_));
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(Base.getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

@@ -82,11 +82,8 @@ public class MyFragment extends Fragment {
         TextView question, question_number;
         Button proceed;
         Typeface typeface;
-        ImageView image_for_que;
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_my, container, false);
         question = (TextView) rootView.findViewById(R.id.question);
-        image_for_que = (ImageView) rootView.findViewById(R.id.image_view);
         question_number = (TextView) rootView.findViewById(R.id.question_number);
         proceed = (Button) rootView.findViewById(R.id.proceed_submission);
         typeface = Typeface.createFromAsset(Base.getAssets(), "fonts/MuseoSans_500.otf");
@@ -119,9 +116,6 @@ public class MyFragment extends Fragment {
             });
 
         }
-
-
-        // Picasso.with(Base.getContext()).load(Config.S3_BASE_URL).into(image_for_que);
 
         question.setText(question_);
 
