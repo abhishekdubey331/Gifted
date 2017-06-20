@@ -88,13 +88,14 @@ public class MakingJsonResponse {
     private void calculateUserResult(int marks_obtained) {
         int total_marks = 4 * Pref.get("last", 30);
         String result_status = "Not Qualified";
-        int percentage = 90;
+        double percentage = (((double) marks_obtained) / total_marks)*1004;
+
         Log.e("Precentage", percentage + "total" + total_marks);
         if (percentage > 80) {
             result_status = "Qualified";
         }
         LoginUserRequest loginUserRequest = new LoginUserRequest();
-        loginUserRequest.send_User_Result(marks_obtained, percentage, result_status, new VolleyCallback() {
+        loginUserRequest.send_User_Result(marks_obtained, percentage+"", result_status, new VolleyCallback() {
             @Override
             public void onSuccessResponse(String result) {
                 Log.e("Response", result);

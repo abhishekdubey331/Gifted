@@ -75,4 +75,6 @@ public class Config {
 
     public static String LEVEL = "level";
 
+    public static String SOURCE_URL_IMAGE="https://s3-us-west-2.amazonaws.com/giftededu/ques_im/";
+
 }

@@ -12,7 +12,9 @@ import com.gifted.app.giftededucation.R;
 import com.gifted.app.giftededucation.activities.TestActivity;
 import com.gifted.app.giftededucation.interfaces.VolleyCallback;
 import com.gifted.app.giftededucation.requests.LoginUserRequest;
+import com.gifted.app.giftededucation.utils.Config;
 import com.thefinestartist.Base;
+import com.thefinestartist.utils.preferences.Pref;
 
 public class InstructionsFragment extends Fragment {
 
@@ -24,7 +26,7 @@ public class InstructionsFragment extends Fragment {
         Button start_test = (Button) view.findViewById(R.id.start_test);
 
         LoginUserRequest loginUserRequest = new LoginUserRequest();
-        loginUserRequest.get_questions("SJI", new VolleyCallback() {
+        loginUserRequest.get_questions(Pref.get(Config.LEVEL,"SJI"), new VolleyCallback() {
             @Override
             public void onSuccessResponse(String result) {
             }

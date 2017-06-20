@@ -1,9 +1,6 @@
 package com.gifted.app.giftededucation.adapters;
 
-import android.graphics.Color;
-import android.media.Image;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +10,10 @@ import android.widget.TextView;
 import com.gifted.app.giftededucation.Global;
 import com.gifted.app.giftededucation.R;
 import com.greendao.db.DaoSession;
-import com.greendao.db.UserResponses;
-import com.greendao.db.UserResponsesDao;
 import com.squareup.picasso.Picasso;
 import com.thefinestartist.Base;
-import com.thefinestartist.utils.preferences.Pref;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 
@@ -45,7 +38,6 @@ public class ImageAnswerAdapter extends RecyclerView.Adapter<ImageAnswerAdapter.
     private JSONObject other_details;
 
     private JSONArray jsonarray;
-
 
 
     public ImageAnswerAdapter(int length, JSONObject jsonObject, String rightAnswer, int question) {
@@ -80,7 +72,7 @@ public class ImageAnswerAdapter extends RecyclerView.Adapter<ImageAnswerAdapter.
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View
             .OnClickListener {
-        private TextView  options;
+        private TextView options;
         private ImageView answer_image;
 
         private MyViewHolder(View view) {

@@ -93,7 +93,7 @@ public class TestActivity extends AppCompatActivity {
             if (question.getQ_code().contentEquals("QTX")) {
                 fList.add(MyFragment.newInstance(question.getOption_json(), question.getQuestion(), question.getImage(), question.getId() + "", question.getAnswer()));
 
-            } else {
+            } else if(question.getQ_code().contentEquals("QIM")) {
                 fList.add(MyFragment2.newInstance(question.getOption_json(), question.getQuestion(), question.getImage(), question.getId() + "", question.getAnswer()));
 
             }

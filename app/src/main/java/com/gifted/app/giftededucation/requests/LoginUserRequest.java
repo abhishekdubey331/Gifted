@@ -178,6 +178,7 @@ public class LoginUserRequest {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 //Adding parameters to request
+                Log.e(TAG, exam_code_);
                 params.put(Config.KEY_EXAM_CODE, exam_code_);
                 //returning parameter
                 return params;
@@ -229,11 +230,11 @@ public class LoginUserRequest {
     }
 
 
-    public void send_User_Result(int marks_obtained, int percentage, String result, final VolleyCallback callback) {
+    public void send_User_Result(int marks_obtained, String percentage, String result, final VolleyCallback callback) {
         //Getting values from edit texts
         final String marks_obtainedd = String.valueOf(marks_obtained);
 
-        final String percentage_ = String.valueOf(percentage);
+        final String percentage_ = percentage;
 
         final String result_ = result;
 

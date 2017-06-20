@@ -13,7 +13,9 @@ import android.widget.TextView;
 import com.gifted.app.giftededucation.R;
 import com.gifted.app.giftededucation.interfaces.VolleyCallback;
 import com.gifted.app.giftededucation.requests.LoginUserRequest;
+import com.gifted.app.giftededucation.utils.Config;
 import com.thefinestartist.Base;
+import com.thefinestartist.utils.preferences.Pref;
 
 public class InstructionsActivity extends AppCompatActivity {
 
@@ -29,18 +31,17 @@ public class InstructionsActivity extends AppCompatActivity {
         mTitle.setText("Instructions");
         instructions = (TextView) findViewById(R.id.fontTextView);
 
-
-
         Button start_test = (Button) findViewById(R.id.start_test);
 
-
-
         LoginUserRequest loginUserRequest = new LoginUserRequest();
-        loginUserRequest.get_questions("SJI", new VolleyCallback() {
+
+        loginUserRequest.get_questions(Pref.get(Config.LEVEL,"SJI"), new VolleyCallback() {
             @Override
             public void onSuccessResponse(String result) {
+
             }
         });
+
 
         start_test.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +50,8 @@ public class InstructionsActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
         instructions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

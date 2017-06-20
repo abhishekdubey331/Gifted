@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gifted.app.giftededucation.R;
-import com.gifted.app.giftededucation.adapters.AnswerAdapter;
 import com.gifted.app.giftededucation.adapters.ImageAnswerAdapter;
+import com.gifted.app.giftededucation.utils.Config;
 import com.gifted.app.giftededucation.utils.MakingJsonResponse;
+import com.squareup.picasso.Picasso;
 import com.thefinestartist.Base;
 import com.thefinestartist.utils.preferences.Pref;
 
@@ -39,6 +41,8 @@ public class MyFragment2 extends Fragment {
     private String options_json;
     private String question_;
     private String que_image_;
+
+    private String image;
 
     private String que_number_;
 
@@ -113,15 +117,25 @@ public class MyFragment2 extends Fragment {
                             })
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
+
                 }
             });
 
         }
 
+        try {
+            JSONObject jsonObject2 = new JSONObject(que_image_);
+            image = jsonObject2.get("image") + "";
+            Log.e("Image", image);
+            image_for_que.setVisibility(View.VISIBLE);
+            Picasso.with(Base.getContext()).load(Config.SOURCE_URL_IMAGE + image).into(image_for_que);
 
-        // Picasso.with(Base.getContext()).load(Config.S3_BASE_URL).into(image_for_que);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         question.setText(question_);
+        ;
 
         question_number.setText("Q." + (Integer.parseInt(que_number_) + 1));
 
@@ -143,6 +157,8 @@ public class MyFragment2 extends Fragment {
         recyclerView.setAdapter(mAdapter);
 
         return rootView;
+
+
     }
 
 }
