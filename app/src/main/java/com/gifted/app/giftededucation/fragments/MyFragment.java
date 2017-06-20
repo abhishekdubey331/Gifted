@@ -1,5 +1,6 @@
 package com.gifted.app.giftededucation.fragments;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -133,12 +134,35 @@ public class MyFragment extends Fragment {
 
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.answers_recycler);
         mAdapter = new AnswerAdapter(jsonObject != null ? jsonObject.length() : 0, jsonObject, getRight_answer, Integer.parseInt(que_number_));
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(Base.getContext());
+        CustomGridLayoutManager mLayoutManager = new CustomGridLayoutManager(Base.getContext()) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
         return rootView;
+    }
+
+    public class CustomGridLayoutManager extends LinearLayoutManager {
+        private boolean isScrollEnabled = true;
+
+        public CustomGridLayoutManager(Context context) {
+            super(context);
+        }
+
+        public void setScrollEnabled(boolean flag) {
+            this.isScrollEnabled = flag;
+        }
+
+        @Override
+        public boolean canScrollVertically() {
+            //Similarly you can customize "canScrollHorizontally()" for managing horizontal scroll
+            return isScrollEnabled && super.canScrollVertically();
+        }
     }
 
 }

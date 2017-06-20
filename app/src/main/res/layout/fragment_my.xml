@@ -32,7 +32,7 @@
             android:padding="15dp"
             android:text="@string/sample_question"
             android:textColor="#404040"
-            android:textSize="18sp" />
+            android:textSize="15sp" />
 
 
     </LinearLayout>

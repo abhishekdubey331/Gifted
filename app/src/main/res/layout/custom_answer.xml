@@ -13,9 +13,8 @@
         android:gravity="start"
         android:background="@drawable/state_list_drawable"
         android:padding="15dp"
-        android:text="a.)"
         android:textColor="#404040"
-        android:textSize="18sp" />
+        android:textSize="15sp" />
 
     <com.gifted.app.giftededucation.customviews.FontTextView
         android:id="@+id/answer"
@@ -26,9 +25,8 @@
         android:background="@drawable/state_list_drawable"
         android:gravity="start"
         android:padding="15dp"
-        android:text="@string/sample_answer"
         android:textColor="#404040"
-        android:textSize="18sp" />
+        android:textSize="15sp" />
 
 
 </LinearLayout>
