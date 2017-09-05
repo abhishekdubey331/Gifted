@@ -10,7 +10,7 @@ public class Config {
 
     public static final String KEY_SCORE = "score";
 
-    public static final String RESPONSE = "response";
+    public static final String RESPONSE = "response_array";
 
     public static final String USER_CLASS = "user_class";
     public static final String KEY_MARKS_OBTAINED = "marks_obtained";
@@ -39,19 +39,19 @@ public class Config {
 
     public static String KEY_MOBILE = "mobile_no";
 
-    public static String KEY_REGISTRAION_URL = "http://35.167.89.23:8080/register";
+    public static String KEY_REGISTRAION_URL = "http://giftededucation.co.in/register_user";
 
 
-    public static String KEY_LOGIN_URL = "http://35.167.89.23:8080/login";
+    public static String KEY_LOGIN_URL = "http://giftededucation.co.in/login_user";
 
-    public static String KEY_RESPONSE_URL = "http://35.167.89.23:8080/user_responses";
+    public static String KEY_RESPONSE_URL = "http://giftededucation.co.in/user_response";
 
 
     public static String KEY_GET_QUE_URL = "http://35.167.89.23:8080/getQuestions";
 
     public static String S3_BASE_URL = "https://s3-us-west-2.amazonaws.com/giftededu/";
 
-    public static String KEY__USER_TOKEN;
+    public static String KEY__USER_TOKEN="token";
 
     public static String KEY_USER_ID = "user_id";
 

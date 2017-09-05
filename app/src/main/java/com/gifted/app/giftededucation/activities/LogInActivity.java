@@ -65,22 +65,22 @@ public class LogInActivity extends AppCompatActivity {
                             try {
                                 JSONObject jsonObject = new JSONObject(result);
                                 if (jsonObject.get("success").toString().contentEquals("true")) {
-                                    String user_id = jsonObject.getJSONArray("userDetails").getJSONObject(0).getString("user_id");
+                                    String user_id = jsonObject.getJSONArray("user_details").getJSONObject(0).getString("user_id");
                                     Pref.put(Config.KEY__USER_TOKEN, jsonObject.getString("token"));
                                     Pref.put(Config.KEY_USER_ID, user_id);
 
 
                                     Gson gson = new Gson();
-                                    String save = gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0).getJSONArray("levels_allowed"));
+                                    String save = gson.toJson(jsonObject.getJSONArray("user_details").getJSONObject(0).getJSONArray("levels_allowed"));
                                     Log.e(TAG, save);
                                     Pref.put(Config.KEY_EXAMS_ALLOWED, save);
-                                    save = gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0).getJSONArray("levels_taken"));
+                                    save = gson.toJson(jsonObject.getJSONArray("user_details").getJSONObject(0).getJSONArray("levels_taken"));
                                     Pref.put(Config.KEY_EXAMS_TAKEN, save);
                                     Log.e(TAG, save);
-                                    Pref.put(Config.USER_OBJECT, gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0)));
+                                    Pref.put(Config.USER_OBJECT, gson.toJson(jsonObject.getJSONArray("user_details").getJSONObject(0)));
                                     // Pref.put(Config.USER_OBJECT, gson.toJson(jsonObject.getJSONArray("userDetails").getJSONObject(0)));
-                                    Pref.put(Config.USER_NAME, jsonObject.getJSONArray("userDetails").getJSONObject(0).getString("name"));
-                                    Pref.put(Config.USER_CLASS, jsonObject.getJSONArray("userDetails").getJSONObject(0).getString("class"));
+                                    Pref.put(Config.USER_NAME, jsonObject.getJSONArray("user_details").getJSONObject(0).getString("name"));
+                                    Pref.put(Config.USER_CLASS, jsonObject.getJSONArray("user_details").getJSONObject(0).getString("class"));
 
                                     startActivity(new Intent(Base.getContext(), LevelsActivity.class));
 

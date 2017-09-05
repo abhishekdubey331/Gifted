@@ -126,8 +126,8 @@ public class LoginUserRequest {
                     @Override
                     public void onResponse(String response) {
                         Log.e(TAG, response);
-                        List<com.greendao.db.Question> questionList = new ArrayList<>();
-                        List<com.greendao.db.UserResponses> userResponses = new ArrayList<>();
+                        List<Question> questionList = new ArrayList<>();
+                        List<UserResponses> userResponses = new ArrayList<>();
 
                         try {
                             JSONObject jsonObject = new JSONObject(response);
@@ -136,20 +136,21 @@ public class LoginUserRequest {
                             Pref.put("last", jsonArray.length());
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                                Log.d("Answer", jsonObject1.optJSONArray("Answer").optJSONObject(0) + "");
                                 questionList.add(new com.greendao.db.Question((long) i, Integer.parseInt(jsonObject1.getString("Q_ID")),
                                         jsonObject1.getString("Que_Code"),
                                         jsonObject1.getString("Exam_Code"),
                                         jsonObject1.getString("Max_Marks"),
-                                        jsonObject1.getString("Question"),
+                                        jsonObject1.getString("Que"),
                                         jsonObject1.getString("Image"),
-                                        jsonObject1.getJSONObject("Options") + "",
-                                        jsonObject1.getString("Answer")));
+                                        jsonObject1.optJSONArray("Options").optJSONObject(0) + "",
+                                        jsonObject1.optJSONArray("Answer").optJSONObject(0) + ""));
                                 userResponses.add(new com.greendao.db.UserResponses((long) i, Integer.parseInt(jsonObject1.getString("Q_ID")),
                                         jsonObject1.getString("Que_Code"),
                                         jsonObject1.getString("Exam_Code"),
                                         jsonObject1.getString("Max_Marks"),
-                                        jsonObject1.getString("Question"),
-                                        jsonObject1.getString("Answer"), "", (long) i));
+                                        jsonObject1.getString("Que"),
+                                        jsonObject1.optJSONArray("Answer").optJSONObject(0) + "", "", (long) i));
                             }
                             getAppDaoSession().deleteAll(Question.class);
                             getAppDaoSession().deleteAll(UserResponses.class);
@@ -217,7 +218,7 @@ public class LoginUserRequest {
                 params.put(Config.KEY_USER_ID, Pref.get(Config.KEY_USER_ID, ""));
                 params.put(Config.KEY_EXAM_CODE, Pref.get(Config.LEVEL, ""));
                 params.put(Config.RESPONSE, responses);
-                // params.put(Config.KEY__USER_TOKEN, Pref.get(Config.KEY__USER_TOKEN, ""));
+                params.put(Config.KEY__USER_TOKEN, Pref.get(Config.KEY__USER_TOKEN, ""));
 
                 //returning parameter
                 return params;

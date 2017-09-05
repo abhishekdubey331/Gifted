@@ -46,6 +46,8 @@ public class MyFragment extends Fragment {
     private String que_number_;
 
     private String getRight_answer;
+    private AnswerAdapter mAdapter;
+
 
     public MyFragment() {
         // Required empty public constructor
@@ -79,7 +81,6 @@ public class MyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        AnswerAdapter mAdapter;
         TextView question, question_number;
         Button proceed;
         Typeface typeface;
@@ -88,35 +89,7 @@ public class MyFragment extends Fragment {
         question_number = (TextView) rootView.findViewById(R.id.question_number);
         proceed = (Button) rootView.findViewById(R.id.proceed_submission);
         typeface = Typeface.createFromAsset(Base.getAssets(), "fonts/MuseoSans_500.otf");
-        if ((Integer.parseInt(que_number_) + 1) == Pref.get("last", 30)) {
-            proceed.setVisibility(View.VISIBLE);
-            proceed.setTypeface(typeface);
-            proceed.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                    new AlertDialog.Builder(getContext())
-                            .setTitle("Submit Test")
-                            .setMessage("Are you sure you have completed your test?")
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // continue with delete
-                                    MakingJsonResponse makingJsonResponse = new MakingJsonResponse(getContext());
-                                    String respo = Pref.get("Response", "").replaceAll("\\\\", "").substring(1);
-                                    makingJsonResponse.makingJson("[" + respo + "]");
-                                }
-                            })
-                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // do nothing
-                                }
-                            })
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
-                }
-            });
-
-        }
 
         question.setText(question_);
 
@@ -143,6 +116,38 @@ public class MyFragment extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
+
+        if ((Integer.parseInt(que_number_) + 1) == Pref.get("last", 30)) {
+            proceed.setVisibility(View.VISIBLE);
+            proceed.setTypeface(typeface);
+            proceed.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    new AlertDialog.Builder(getContext())
+                            .setTitle("Submit Test")
+                            .setMessage("Are you sure you have completed your test?")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // continue with delete
+                                MakingJsonResponse makingJsonResponse = new MakingJsonResponse(getContext());
+                                    String respo = Pref.get(Base.getResources().getString(R.string.response), "").replaceAll("\\\\", "").substring(1);
+                                    makingJsonResponse.makingJson("[" + respo + "]");
+
+
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // do nothing
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                }
+            });
+
+        }
 
         return rootView;
     }

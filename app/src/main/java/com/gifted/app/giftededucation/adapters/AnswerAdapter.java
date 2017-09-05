@@ -20,6 +20,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 
 public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHolder> {
 
@@ -36,8 +40,9 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
 
     private int question_number;
     private JSONObject responses_obj;
-    private JSONObject other_details;
-    private JSONArray jsonarray;
+    private JSONArray other_details;
+    private JSONObject newJsonObject;
+    List<String> json = new ArrayList<>();
 
 
     public AnswerAdapter(int length, JSONObject jsonObject, String rightAnswer, int question) {
@@ -46,8 +51,8 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
         this.right_answer = rightAnswer;
         question_number = question;
         responses_obj = new JSONObject();
-        other_details = new JSONObject();
-        jsonarray = new JSONArray();
+        other_details = new JSONArray();
+        newJsonObject = new JSONObject();
     }
 
     @Override
@@ -115,21 +120,26 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.MyViewHold
                 userResponses.setUser_response(options_values[selected_position]);
                 getAppDaoSession().getUserResponsesDao().update(userResponses);
                 try {
-                    other_details.put("Q_ID", userResponses.getQ_no());
-                    other_details.put("right_answer", right_answer);
-                    other_details.put("user_response", options_values[selected_position]);
-                    other_details.put("max_marks", 4);
-                    jsonarray.put(other_details);
-                    Pref.put("Response", Pref.get("Response", "") + "," + jsonarray.toString().replace("[", "").replace("]", ""));
+
+
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("Q_No", userResponses.getId() + 1);
+                    jsonObject.put("Q_ID", userResponses.getQ_no());
+                    jsonObject.put("response", options_values[selected_position]);
+
+
+                    Pref.put(Base.getResources().getString(R.string.response), Pref.get(Base.getResources().getString(R.string.response), "") + "," + jsonObject.toString().replace("[", "").replace("]", ""));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
 
+
             }
         });
     }
+
 
     @Override
     public int getItemCount() {

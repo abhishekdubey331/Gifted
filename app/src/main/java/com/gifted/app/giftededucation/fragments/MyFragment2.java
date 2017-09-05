@@ -1,6 +1,7 @@
 package com.gifted.app.giftededucation.fragments;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,7 +9,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +17,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gifted.app.giftededucation.R;
+import com.gifted.app.giftededucation.activities.FullImageActivity;
 import com.gifted.app.giftededucation.adapters.AnswerAdapter;
-import com.gifted.app.giftededucation.adapters.ImageAnswerAdapter;
-import com.gifted.app.giftededucation.adapters.OptionsAdapter;
 import com.gifted.app.giftededucation.utils.Config;
 import com.gifted.app.giftededucation.utils.MakingJsonResponse;
 import com.squareup.picasso.Picasso;
 import com.thefinestartist.Base;
 import com.thefinestartist.utils.preferences.Pref;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -49,6 +49,8 @@ public class MyFragment2 extends Fragment {
     private String que_number_;
 
     private String getRight_answer;
+
+    private AnswerAdapter mAdapter;
 
     public MyFragment2() {
         // Required empty public constructor
@@ -82,7 +84,7 @@ public class MyFragment2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        AnswerAdapter mAdapter;
+
         TextView question, question_number;
         Button proceed;
         Typeface typeface;
@@ -94,50 +96,24 @@ public class MyFragment2 extends Fragment {
         question_number = (TextView) rootView.findViewById(R.id.question_number);
         proceed = (Button) rootView.findViewById(R.id.proceed_submission);
         typeface = Typeface.createFromAsset(Base.getAssets(), "fonts/MuseoSans_500.otf");
-        if ((Integer.parseInt(que_number_) + 1) == Pref.get("last", 30)) {
-            proceed.setVisibility(View.VISIBLE);
-            proceed.setTypeface(typeface);
-            proceed.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    new AlertDialog.Builder(getContext())
-                            .setTitle("Submit Test")
-                            .setMessage("Are you sure you have completed your test?")
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // continue with delete
-                                    MakingJsonResponse makingJsonResponse = new MakingJsonResponse(getContext());
-                                    String respo = Pref.get("Response", "").replaceAll("\\\\", "").substring(1);
-                                    makingJsonResponse.makingJson("[" + respo + "]");
-                                }
-                            })
-                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // do nothing
-                                }
-                            })
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
-
-                }
-            });
-
-        }
 
         try {
-            JSONObject jsonObject2 = new JSONObject(que_image_);
-            image = jsonObject2.get("image") + "";
-            Log.e("Image", image);
+            JSONArray jsonArray = new JSONArray(que_image_);
+            image = jsonArray.getJSONObject(0).getString("image") + "";
             image_for_que.setVisibility(View.VISIBLE);
-            Picasso.with(Base.getContext()).load(Config.SOURCE_URL_IMAGE + image).into(image_for_que);
+            Picasso.with(Base.getContext()).load(Config.SOURCE_URL_IMAGE + image).placeholder(R.drawable.loading).into(image_for_que);
+            /*image_for_que.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(Base.getContext(), FullImageActivity.class).putExtra("image", image));
+                }
+            });*/
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         question.setText(question_);
-        ;
 
         question_number.setText("Q." + (Integer.parseInt(que_number_) + 1));
 
@@ -157,6 +133,40 @@ public class MyFragment2 extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
+
+
+        if ((Integer.parseInt(que_number_) + 1) == Pref.get("last", 30)) {
+            proceed.setVisibility(View.VISIBLE);
+            proceed.setTypeface(typeface);
+            proceed.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    new AlertDialog.Builder(getContext())
+                            .setTitle("Submit Test")
+                            .setMessage("Are you sure you have completed your test?")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // continue with delete
+                                    MakingJsonResponse makingJsonResponse = new MakingJsonResponse(getContext());
+                                    String respo = Pref.get(Base.getResources().getString(R.string.response), "").replaceAll("\\\\", "").substring(1);
+                                    makingJsonResponse.makingJson("[" + respo + "]");
+
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // do nothing
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+
+                }
+            });
+
+        }
+
 
         return rootView;
 

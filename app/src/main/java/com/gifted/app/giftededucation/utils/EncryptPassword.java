@@ -10,8 +10,8 @@ public class EncryptPassword {
 
 
     public static String md5(String s) {
-        try {
-            // Create MD5 Hash
+
+          /*  // Create MD5 Hash
             MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
             digest.update(s.getBytes());
             byte messageDigest[] = digest.digest();
@@ -24,8 +24,8 @@ public class EncryptPassword {
 
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-        }
-        return "";
+        }*/
+        return s;
     }
 
 }

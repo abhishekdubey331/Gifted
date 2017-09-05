@@ -25,6 +25,7 @@
         <activity android:name=".activities.LevelsActivity" />
         <activity android:name=".activities.InstructionsActivity" />
         <activity android:name=".activities.SubmissionActivity" />
+        <activity android:name=".activities.FullImageActivity"></activity>
     </application>
 
 </manifest>

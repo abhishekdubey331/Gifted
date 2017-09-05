@@ -1,13 +1,10 @@
 package com.gifted.app.giftededucation.utils;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
 import com.gifted.app.giftededucation.Global;
-import com.gifted.app.giftededucation.R;
-import com.gifted.app.giftededucation.activities.LogInActivity;
 import com.gifted.app.giftededucation.activities.SubmissionActivity;
 import com.gifted.app.giftededucation.activities.TestActivity;
 import com.gifted.app.giftededucation.interfaces.VolleyCallback;
@@ -17,12 +14,6 @@ import com.greendao.db.UserResponses;
 import com.greendao.db.UserResponsesDao;
 import com.thefinestartist.Base;
 import com.thefinestartist.utils.preferences.Pref;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import dmax.dialog.SpotsDialog;
 
 /**
  * Created by DIC on 5/8/2017.
@@ -56,8 +47,23 @@ public class MakingJsonResponse {
         }
 
     }
+
     public void makingJson(String jsonObject) {
-        JSONObject user_id = new JSONObject();
+
+
+        Log.d("response", jsonObject);
+        LoginUserRequest loginUserRequest = new LoginUserRequest();
+        loginUserRequest.sendResponse(jsonObject, new VolleyCallback() {
+            @Override
+            public void onSuccessResponse(String result) {
+                Log.e("Response", result);
+                // calculateUserResult(count);
+                Base.getContext().startActivity(new Intent(Base.getContext(), SubmissionActivity.class).putExtra("data", result).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                ((TestActivity) mContext).finish();
+            }
+        });
+
+       /* JSONObject user_id = new JSONObject();
         try {
             for (int i = 0; i < Pref.get(Config.KEY_LAST_QUE, 30); i++) {
                 count = count + getTotalScore(i);
@@ -82,20 +88,21 @@ public class MakingJsonResponse {
 
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
+
     }
 
     private void calculateUserResult(int marks_obtained) {
         int total_marks = 4 * Pref.get("last", 30);
         String result_status = "Not Qualified";
-        double percentage = (((double) marks_obtained) / total_marks)*100;
+        double percentage = (((double) marks_obtained) / total_marks) * 100;
 
         Log.e("Precentage", percentage + "total" + total_marks);
         if (percentage > 80) {
             result_status = "Qualified";
         }
         LoginUserRequest loginUserRequest = new LoginUserRequest();
-        loginUserRequest.send_User_Result(marks_obtained, percentage+"", result_status, new VolleyCallback() {
+        loginUserRequest.send_User_Result(marks_obtained, percentage + "", result_status, new VolleyCallback() {
             @Override
             public void onSuccessResponse(String result) {
                 Log.e("Response", result);

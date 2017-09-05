@@ -41,6 +41,7 @@ allowed to make any further changes after final submission of the test.\n●If y
     <string name="smat_content">&#160;&#160;&#160;&#160;&#160;Initiative by the office of
         \nPrincipal Scientific Advisor to
         \n&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Govt. of India</string>
+    <string name="response">Response</string>
 
 
 </resources>
